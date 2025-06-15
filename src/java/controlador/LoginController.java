@@ -16,14 +16,12 @@ import java.sql.ResultSet;
 
 @WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String correo = request.getParameter("correo");
         String contrasena = request.getParameter("contrasena");
 
         try {
             Connection con = Conexion.getInstancia().getConexion();
-
             String sql = "SELECT * FROM usuario WHERE correo = ? AND contrasena = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, correo);
@@ -31,7 +29,6 @@ public class LoginController extends HttpServlet {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                // Crea el objeto Usuario con todos los datos desde BD
                 Usuario usuario = new Usuario(
                     rs.getInt("id"),
                     rs.getString("nombre_completo"),
@@ -39,28 +36,27 @@ public class LoginController extends HttpServlet {
                     rs.getString("telefono"),
                     rs.getString("direccion"),
                     rs.getString("contrasena"),
-                    rs.getString("rol") // nuevo campo
+                    rs.getString("rol") // Asegúrate de incluir el rol
                 );
 
-                // Guarda el objeto Usuario en sesión
                 HttpSession session = request.getSession();
-                session.setAttribute("usuario", usuario); // Objeto completo
+                session.setAttribute("usuario", usuario);
                 session.setAttribute("usuarioNombre", usuario.getNombreCompleto()); // ✅ Esta línea agrega el nombre
-
-                response.sendRedirect(request.getContextPath() + "/restaurantes");
-
+      
+                
+                // Redirección basada en el rol
+                if ("ADMINISTRADOR".equalsIgnoreCase(usuario.getRol())) {
+                    response.sendRedirect("AdminI.jsp");
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/restaurantes");
+                }
             } else {
-                // Credenciales incorrectas
-                response.sendRedirect("login.jsp?error=1");
+                 response.sendRedirect("login.jsp?error=1");
             }
-
         } catch (Exception e) {
             e.printStackTrace();
             response.sendRedirect("login.jsp?error=2");
         }
     }
 }
-
-
-
 
