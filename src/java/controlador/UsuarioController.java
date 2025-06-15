@@ -38,7 +38,7 @@ public class UsuarioController extends HttpServlet {
                 return;
             }
 
-            String sql = "INSERT INTO usuario (nombre_completo, correo, telefono, direccion, contrasena) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO usuario (nombre_completo, correo, telefono, direccion, contrasena, rol) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, nombreCompleto);
             ps.setString(2, correo);
