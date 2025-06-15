@@ -3,16 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/error.jsp</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/boleta.jsp</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/modelo/Platos.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/carrito.jsp</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/modelo/DetallePedido.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/modelo/Restaurante.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/modelo/ItemCarrito.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/FinalizarPedidoServlet.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/modelo/Pedido.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/LoginController.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/util/Conexion.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/util/DetallePedidoIterator.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/strategy/MetodoPago.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/modelo/Pedido.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/modelo/Usuario.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/LoginController.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/AgregarCarrito.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/FinalizarPedidoServlet.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/UsuarioController.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/RestauranteController.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/RegistrarPedidoController.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/PlatosController.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/LogoutServlet.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/PedidoServlet.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/GenerarPDFServlet.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/EliminarItemCarritoController.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/CarritoServlet.java</file>
         </group>
     </open-files>
 </project-private>
