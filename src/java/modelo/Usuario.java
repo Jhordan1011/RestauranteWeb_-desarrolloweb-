@@ -11,6 +11,7 @@ public class Usuario {
     private String telefono;
     private String direccion;
     private String contrasena;
+    private String test;
 
     // Constructor con id (para cargar usuarios desde BD)
     public Usuario(int id, String nombreCompleto, String correo, String telefono, String direccion, String contrasena) {
