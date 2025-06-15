@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controlador;
 
 import modelo.Usuario;
@@ -23,6 +19,7 @@ public class UsuarioController extends HttpServlet {
         String telefono = request.getParameter("telefono");
         String direccion = request.getParameter("direccion");
         String contrasena = request.getParameter("contrasena");
+        
 
         // Validación básica de campos vacíos
         if (nombreCompleto == null || correo == null || telefono == null || direccion == null || contrasena == null ||
@@ -48,6 +45,7 @@ public class UsuarioController extends HttpServlet {
             ps.setString(3, telefono);
             ps.setString(4, direccion);
             ps.setString(5, contrasena);
+            ps.setString(6, "USUARIO");
 
             int filas = ps.executeUpdate();
             if (filas == 0) {
@@ -62,7 +60,7 @@ public class UsuarioController extends HttpServlet {
                 idGenerado = rs.getInt(1);
             }
 
-            Usuario usuarioConId = new Usuario(idGenerado, nombreCompleto, correo, telefono, direccion, contrasena);
+            Usuario usuarioConId = new Usuario(idGenerado, nombreCompleto, correo, telefono, direccion, contrasena, "USUARIO");
             HttpSession session = request.getSession();
             session.setAttribute("usuario", usuarioConId);
 

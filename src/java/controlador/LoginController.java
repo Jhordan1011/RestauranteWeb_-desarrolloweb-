@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controlador;
 
 import jakarta.servlet.ServletException;
@@ -42,7 +38,8 @@ public class LoginController extends HttpServlet {
                     rs.getString("correo"),
                     rs.getString("telefono"),
                     rs.getString("direccion"),
-                    rs.getString("contrasena")
+                    rs.getString("contrasena"),
+                    rs.getString("rol") // nuevo campo
                 );
 
                 // Guarda el objeto Usuario en sesión
@@ -63,5 +60,7 @@ public class LoginController extends HttpServlet {
         }
     }
 }
+
+
 
 
