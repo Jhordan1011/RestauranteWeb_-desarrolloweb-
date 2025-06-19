@@ -8,12 +8,22 @@ public class DetallePedido {
     private int cantidad;
     private double precioUnitario;
     private double subtotal;
-    private String nombrePlato; // Puedes mantenerlo para mostrar en la interfaz, aunque no esté en BD
+    private String nombrePlato;// Puedes mantenerlo para mostrar en la interfaz, aunque no esté en BD
+    private int restauranteId;
 
     public DetallePedido() {
     }
 
-    // Getters y Setters
+    public DetallePedido(int id, Pedido pedido, int platoId, int cantidad, double precioUnitario, double subtotal, String nombrePlato, int restauranteId) {
+        this.id = id;
+        this.pedido = pedido;
+        this.platoId = platoId;
+        this.cantidad = cantidad;
+        this.precioUnitario = precioUnitario;
+        this.subtotal = subtotal;
+        this.nombrePlato = nombrePlato;
+        this.restauranteId = restauranteId;
+    }
 
     public int getId() {
         return id;
@@ -70,4 +80,16 @@ public class DetallePedido {
     public void setNombrePlato(String nombrePlato) {
         this.nombrePlato = nombrePlato;
     }
+
+    public int getRestauranteId() {
+        return restauranteId;
+    }
+
+    public void setRestauranteId(int restauranteId) {
+        this.restauranteId = restauranteId;
+    }
+
+  
+    
+    
 }

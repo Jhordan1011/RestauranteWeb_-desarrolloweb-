@@ -5,6 +5,13 @@
 <%
     Pedido pedido = (Pedido) session.getAttribute("pedido");
     List<DetallePedido> detalles = (pedido != null) ? pedido.getDetalles() : null;
+    
+     int ultimoRestauranteId = 0;
+    if (detalles != null && !detalles.isEmpty()) {
+        ultimoRestauranteId = detalles.get(detalles.size() - 1).getRestauranteId();
+    }
+    
+
 %>
 <!DOCTYPE html>
 <html>
@@ -153,8 +160,8 @@
     
     <div class="mt-3">
         <a href="<%= request.getContextPath() %>/restaurantes" class="btn btn-secondary">Elegir Nuevo Restaurante</a>
-        <% if (pedido != null) { %>
-            <a href="<%= request.getContextPath() %>/platos?restauranteId=<%= pedido.getRestauranteID() %>" class="btn btn-primary ms-2">Agregar Más Platos</a>
+        <% if (detalles != null && !detalles.isEmpty()) { %>
+            <a href="<%= request.getContextPath() %>/platos?restauranteId=<%= ultimoRestauranteId %>" class="btn btn-primary ms-2">Agregar Más Platos</a>
         <% } %>
     </div>
 

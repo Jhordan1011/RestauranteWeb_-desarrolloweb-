@@ -40,7 +40,7 @@ public class PedidoServlet extends HttpServlet {
         int restauranteId = Integer.parseInt(request.getParameter("restauranteId"));
 
         // 5. Asignar restaurante al pedido
-        pedido.setRestauranteID(restauranteId);
+        //pedido.setRestauranteID(restauranteId);
 
         // 6. Crear nuevo detalle de pedido
         DetallePedido detalle = new DetallePedido();
@@ -49,6 +49,7 @@ public class PedidoServlet extends HttpServlet {
         detalle.setCantidad(1);
         detalle.setPrecioUnitario(precio);
         detalle.setSubtotal(precio * detalle.getCantidad());
+        detalle.setRestauranteId(restauranteId); //
 
         // 7. Agregar al pedido
         pedido.getDetalles().add(detalle);
