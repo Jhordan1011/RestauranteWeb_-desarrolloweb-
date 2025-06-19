@@ -123,6 +123,10 @@
             <button type="submit" class="btn btn-primary">📄 Descargar Boleta en PDF</button>
         </div>
     </form>
+    
+    <div class="text-center">
+    <a href="seguimiento_pedido.jsp" class="btn btn-success mt-3">📦 Ver Seguimiento del Pedido</a>
+    </div>
 
 </body>
 </html>
