@@ -20,35 +20,40 @@ public class PedidoFacade {
         try {
             conn = Conexion.getInstancia().getConexion();
             conn.setAutoCommit(false);
-
-            String sqlPedido = "INSERT INTO pedidos (fecha_pedido, restaurante_id, usuario_id, estado, total, direccion_entrega, metodo_pago, notas) VALUES (NOW(), ?, ?, ?, ?, ?, ?, ?)";
+            
+            
+            String sqlPedido = "INSERT INTO pedidos (fecha_pedido, usuario_id, estado, total, direccion_entrega, metodo_pago, notas) VALUES (NOW(), ?, ?, ?, ?, ?, ?)";
             PreparedStatement psPedido = conn.prepareStatement(sqlPedido, Statement.RETURN_GENERATED_KEYS);
-            psPedido.setInt(1, pedido.getRestauranteID());
-            psPedido.setInt(2, pedido.getUsuarioId());
-            psPedido.setString(3, pedido.getEstado().toLowerCase());
-            psPedido.setDouble(4, pedido.getTotal());
-            psPedido.setString(5, pedido.getDireccionEntrega());
-            psPedido.setString(6, pedido.getMetodoPago().name());
-            psPedido.setString(7, pedido.getNotas() != null ? pedido.getNotas() : "");
+            psPedido.setInt(1, pedido.getUsuarioId());
+            psPedido.setString(2, pedido.getEstado().toLowerCase());
+            psPedido.setDouble(3, pedido.getTotal());
+            psPedido.setString(4, pedido.getDireccionEntrega());
+            psPedido.setString(5, pedido.getMetodoPago().name());
+            psPedido.setString(6, pedido.getNotas() != null ? pedido.getNotas() : "");
 
             psPedido.executeUpdate();
 
+            // Obtener ID generado
             ResultSet rs = psPedido.getGeneratedKeys();
             int pedidoId = 0;
             if (rs.next()) {
                 pedidoId = rs.getInt(1);
-                pedido.setId(pedidoId); // ✅ Asigna el ID generado al objeto pedido
+                pedido.setId(pedidoId);
             }
 
-            String sqlDetalle = "INSERT INTO detalles_pedido (pedido_id, plato_id, cantidad, precio_unitario, subtotal) VALUES (?, ?, ?, ?, ?)";
+            String sqlDetalle = "INSERT INTO detalles_pedido (pedido_id, restaurante_id, plato_id, cantidad, precio_unitario, subtotal) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement psDetalle = conn.prepareStatement(sqlDetalle);
 
             for (DetallePedido d : pedido.getDetalles()) {
+                
+                System.out.println("Restaurante ID: " + d.getRestauranteId()); // 🔍 Añade esta línea
+                
                 psDetalle.setInt(1, pedidoId);
-                psDetalle.setInt(2, d.getPlatoId());
-                psDetalle.setInt(3, d.getCantidad());
-                psDetalle.setDouble(4, d.getPrecioUnitario());
-                psDetalle.setDouble(5, d.getSubtotal());
+                psDetalle.setInt(2, d.getRestauranteId());
+                psDetalle.setInt(3, d.getPlatoId());
+                psDetalle.setInt(4, d.getCantidad());
+                psDetalle.setDouble(5, d.getPrecioUnitario());
+                psDetalle.setDouble(6, d.getSubtotal());
                 psDetalle.addBatch();
             }
 
