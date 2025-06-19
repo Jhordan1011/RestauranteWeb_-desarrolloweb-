@@ -8,7 +8,6 @@ public class Pedido {
 
     private int id;
     private int usuarioId;
-    private int restauranteID;
     private Date fechaPedido;          // Coincide con fecha_pedido
     private String estado;
     private double total;
@@ -43,14 +42,6 @@ public class Pedido {
 
     public void setUsuarioId(int usuarioId) {
         this.usuarioId = usuarioId;
-    }
-
-    public int getRestauranteID() {
-        return restauranteID;
-    }
-
-    public void setRestauranteID(int restauranteID) {
-        this.restauranteID = restauranteID;
     }
 
     public Date getFechaPedido() {

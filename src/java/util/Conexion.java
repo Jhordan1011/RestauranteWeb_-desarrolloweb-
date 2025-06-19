@@ -19,7 +19,7 @@ public class Conexion {
     private final String url = "jdbc:mysql://localhost:3306/restaurante_simple?useSSL=false&serverTimezone=UTC";
 
     private final String usuario = "root";
-    private final String clave = "contreras10";
+    private final String clave = "ajugardota2";
 
     private Conexion() {
         try {
