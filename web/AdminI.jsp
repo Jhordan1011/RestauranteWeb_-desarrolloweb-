@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<%@ page import="java.util.List" %>
+<%@ page import="modelo.Pedido" %>
+<%
+  List<Pedido> pedidos = (List<Pedido>) request.getAttribute("pedidos");
+%>
+
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -71,20 +77,35 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>101</td>
-            <td>23</td>
-            <td>2025-06-19</td>
-            <td>S/. 53.00</td>
-            <td><span class="badge bg-success">Entregado</span></td>
-            <td>Av. Los Olivos 123</td>
-            <td>Entregar en portería</td>
-            <td>Tarjeta</td>
-            <td>
-              <button class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil-square"></i></button>
-              <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-            </td>
-          </tr>
+          <% if (pedidos != null && !pedidos.isEmpty()) {
+     for (Pedido p : pedidos) { %>
+<tr>
+  <td><%= p.getId() %></td>
+  <td><%= p.getUsuarioId() %></td>
+  <td><%= p.getFechaPedido()%></td>
+  <td>S/. <%= p.getTotal() %></td>
+  <td>
+    <span class="badge bg-<%= p.getEstado().equalsIgnoreCase("entregado") ? "success" : "warning" %>">
+      <%= p.getEstado() %>
+    </span>
+  </td>
+  <td><%= p.getDireccionEntrega() %></td>
+  <td><%= p.getNotas() %></td>
+  <td><%= p.getMetodoPago() %></td>
+  <td>
+    <button class="btn btn-sm btn-outline-primary me-1">
+      <i class="bi bi-pencil-square"></i>
+    </button>
+    <button class="btn btn-sm btn-outline-danger">
+      <i class="bi bi-trash"></i>
+    </button>
+  </td>
+</tr>
+<%  }
+   } else { %>
+<tr><td colspan="9">No hay pedidos registrados.</td></tr>
+<% } %>
+
         </tbody>
       </table>
     </div>

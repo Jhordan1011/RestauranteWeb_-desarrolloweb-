@@ -20,7 +20,7 @@ public class Conexion {
 
     private final String usuario = "root";
 
-    private final String clave = "andre123";
+    private final String clave = "ajugardota2";
 
 
 

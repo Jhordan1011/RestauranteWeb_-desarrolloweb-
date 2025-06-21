@@ -46,7 +46,7 @@ public class LoginController extends HttpServlet {
                 
                 // Redirección basada en el rol
                 if ("ADMINISTRADOR".equalsIgnoreCase(usuario.getRol())) {
-                    response.sendRedirect("AdminI.jsp");
+                    response.sendRedirect("adminPedidos");
                 } else {
                     response.sendRedirect(request.getContextPath() + "/restaurantes");
                 }
