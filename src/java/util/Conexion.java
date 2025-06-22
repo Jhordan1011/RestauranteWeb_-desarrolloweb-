@@ -9,15 +9,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexion {
-    private static Conexion instancia;
 
-    public static Connection getConnection() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    private static Conexion instancia;
     private Connection conexion;
 
     private final String url = "jdbc:mysql://localhost:3306/restaurante_simple?useSSL=false&serverTimezone=UTC";
-
     private final String usuario = "root";
     private final String clave = "contreras10";
 
@@ -35,6 +31,11 @@ public class Conexion {
             instancia = new Conexion();
         }
         return instancia;
+    }
+
+    // ✅ MÉTODO CORREGIDO: devuelve la conexión del Singleton
+    public static Connection getConnection() {
+        return getInstancia().getConexion();
     }
 
     public Connection getConexion() {

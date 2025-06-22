@@ -9,6 +9,18 @@
     String direccion = (String) session.getAttribute("ultimoPedidoDireccion");
     String telefono = (String) session.getAttribute("ultimoPedidoTelefono");
     String metodoPago = (String) session.getAttribute("ultimoMetodoPago");
+
+    // Coordenadas DINÁMICAS del restaurante y cliente desde sesión
+    Double latRestaurante = (Double) session.getAttribute("latRestaurante");
+    Double lonRestaurante = (Double) session.getAttribute("lonRestaurante");
+    Double latCliente = (Double) session.getAttribute("latCliente");
+    Double lonCliente = (Double) session.getAttribute("lonCliente");
+
+    // Valores por defecto si alguna coord es nula
+    if (latRestaurante == null) latRestaurante = -12.1220;
+    if (lonRestaurante == null) lonRestaurante = -77.0300;
+    if (latCliente == null) latCliente = -12.1070;
+    if (lonCliente == null) lonCliente = -77.0050;
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -16,6 +28,10 @@
     <meta charset="UTF-8">
     <title>Seguimiento del Pedido</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <style>
         body {
             background: linear-gradient(to bottom, #1a1a1a, #333);
@@ -39,15 +55,11 @@
             font-size: 1.2rem;
             margin-bottom: 20px;
         }
-        .mapa-box {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .mapa-box img {
-            width: 100%;
-            max-width: 500px;
+        #map {
+            height: 400px;
             border-radius: 10px;
             border: 3px solid #FFD700;
+            margin-top: 20px;
         }
         table {
             background-color: #2a2a2a;
@@ -88,7 +100,6 @@
     <p><%= metodoPago != null ? metodoPago : "No especificado" %></p>
 
     <h4>🍽 Platos pedidos:</h4>
-
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -115,9 +126,7 @@
                 <td><%= precio %></td>
             </tr>
         <%
-                        } catch (Exception e) {
-                            // si no puede convertir el precio, lo ignora
-                        }
+                        } catch (Exception e) { }
                     }
                 }
             } else {
@@ -135,11 +144,8 @@
         </tbody>
     </table>
 
-    <div class="mapa-box mt-4">
-        <h4>🗺 Mapa simulado de entrega</h4>
-        <img src="img/mapa_ruta_simulada.png" alt="Mapa del recorrido">
-        <p class="mt-2 text-muted">Recorrido desde el restaurante hasta tu dirección</p>
-    </div>
+    <h4 class="mt-5">🗺 Mapa de ubicación</h4>
+    <div id="map"></div>
 
     <div class="text-center mt-4">
         <a href="seleccionar_restaurante.jsp" class="btn btn-primary">🛒 Hacer otro pedido</a>
@@ -147,7 +153,24 @@
 
 </div>
 
+<!-- Leaflet Mapa -->
+<script>
+    var map = L.map('map').setView([<%= (latRestaurante + latCliente)/2 %>, <%= (lonRestaurante + lonCliente)/2 %>], 14);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    L.marker([<%= latRestaurante %>, <%= lonRestaurante %>])
+        .addTo(map)
+        .bindPopup("📍 Restaurante");
+
+    L.marker([<%= latCliente %>, <%= lonCliente %>])
+        .addTo(map)
+        .bindPopup("🏠 Entrega");
+</script>
+
 </body>
 </html>
-
 

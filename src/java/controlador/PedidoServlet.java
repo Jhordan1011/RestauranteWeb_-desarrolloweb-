@@ -9,15 +9,16 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import modelo.DetallePedido;
 import modelo.Pedido;
-import modelo.Usuario; // Importa la clase Usuario
+import modelo.Usuario;
 
 @WebServlet(name = "PedidoServlet", value = "/PedidoServlet")
 public class PedidoServlet extends HttpServlet {
-    
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        
-        // 1. Obtener el usuario logueado (ESENCIAL)
+
+        // 1. Obtener el usuario logueado
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         if (usuario == null) {
             response.sendRedirect("login.jsp");
@@ -28,40 +29,41 @@ public class PedidoServlet extends HttpServlet {
         Pedido pedido = (Pedido) session.getAttribute("pedido");
         if (pedido == null) {
             pedido = new Pedido();
-            // 3. Asignar el ID del usuario al pedido (SOLUCIÓN AL ERROR)
             pedido.setUsuarioId(usuario.getId());
             session.setAttribute("pedido", pedido);
         }
 
-        // 4. Leer parámetros del formulario
+        // 3. Leer parámetros del formulario
         int platoId = Integer.parseInt(request.getParameter("platoId"));
         String nombrePlato = request.getParameter("nombrePlato");
         double precio = Double.parseDouble(request.getParameter("precio"));
         int restauranteId = Integer.parseInt(request.getParameter("restauranteId"));
 
-        // 5. Asignar restaurante al pedido
-        //pedido.setRestauranteID(restauranteId);
+        System.out.println("Restaurante recibido en PedidoServlet: " + restauranteId);
 
-        // 6. Crear nuevo detalle de pedido
+        // ✅ 4. Asignar restauranteId al pedido directamente (CORRECCIÓN)
+        pedido.setRestauranteId(restauranteId);
+
+        // 5. Crear el detalle del pedido
         DetallePedido detalle = new DetallePedido();
         detalle.setPlatoId(platoId);
         detalle.setNombrePlato(nombrePlato);
         detalle.setCantidad(1);
         detalle.setPrecioUnitario(precio);
         detalle.setSubtotal(precio * detalle.getCantidad());
-        detalle.setRestauranteId(restauranteId); //
+        detalle.setRestauranteId(restauranteId);
 
-        // 7. Agregar al pedido
+        // 6. Agregar detalle al pedido
         pedido.getDetalles().add(detalle);
 
-        // 8. Actualizar total
+        // 7. Calcular total
         double total = 0.0;
         for (DetallePedido d : pedido.getDetalles()) {
             total += d.getSubtotal();
         }
         pedido.setTotal(total);
 
-        // 9. Redirigir al JSP que muestra el pedido acumulado
+        // 8. Redirigir al JSP del pedido
         response.sendRedirect("ver_pedido.jsp");
-    }    
+    }
 }
