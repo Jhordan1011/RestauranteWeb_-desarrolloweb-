@@ -8,8 +8,16 @@ import modelo.DetallePedido;
 import modelo.Pedido;
 import modelo.Restaurante;
 import modelo.dao.RestauranteDAO;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import javax.net.ssl.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.security.cert.X509Certificate;
 
 @WebServlet(name = "FinalizarPedidoServlet", value = "/FinalizarPedidoServlet")
 public class FinalizarPedidoServlet extends HttpServlet {
@@ -24,67 +32,114 @@ public class FinalizarPedidoServlet extends HttpServlet {
             return;
         }
 
-        // Captura datos del formulario
         String direccion = request.getParameter("direccion");
         String notas = request.getParameter("notas");
         String metodoPagoStr = request.getParameter("metodoPago");
 
-        // Actualiza el objeto pedido
         pedido.setDireccionEntrega(direccion);
         pedido.setNotas(notas);
         pedido.setMetodoPago(Pedido.MetodoPago.valueOf(metodoPagoStr));
 
-        // ✅ Aplica el patrón Facade
         PedidoFacade facade = new PedidoFacade();
         boolean exito = facade.guardarPedido(pedido);
 
         if (exito) {
-            // 🟨 NUEVO: Obtener coordenadas del restaurante
             RestauranteDAO restauranteDAO = new RestauranteDAO();
             Restaurante restaurante = restauranteDAO.buscarPorId(pedido.getRestauranteId());
             if (restaurante != null) {
                 session.setAttribute("latRestaurante", restaurante.getLatitud());
                 session.setAttribute("lonRestaurante", restaurante.getLongitud());
             } else {
-                session.setAttribute("latRestaurante", -12.1220); // valor por defecto
+                session.setAttribute("latRestaurante", -12.1220);
                 session.setAttribute("lonRestaurante", -77.0300);
             }
 
-            // 🟨 TEMPORAL: Coordenadas fijas del cliente (si no tienes geocodificación aún)
-            session.setAttribute("latCliente", -12.1070);
-            session.setAttribute("lonCliente", -77.0050);
+            // ✅ Ignorar SSL en entorno de desarrollo
+            try {
+                TrustManager[] trustAllCerts = new TrustManager[]{
+                    new X509TrustManager() {
+                        public void checkClientTrusted(X509Certificate[] certs, String authType) {}
+                        public void checkServerTrusted(X509Certificate[] certs, String authType) {}
+                        public X509Certificate[] getAcceptedIssuers() { return null; }
+                    }
+                };
 
-            
-            System.out.println("Restaurante obtenido: " + (restaurante != null ? restaurante.getNombre() : "NO ENCONTRADO"));
-System.out.println("Lat: " + (restaurante != null ? restaurante.getLatitud() : "sin lat"));
-System.out.println("Lon: " + (restaurante != null ? restaurante.getLongitud() : "sin lon"));
+                SSLContext sc = SSLContext.getInstance("SSL");
+                sc.init(null, trustAllCerts, new java.security.SecureRandom());
+                HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
 
-            
-            
-            // 🟨 Guardar datos para boleta y seguimiento
+                // Ignora verificación de nombre de host
+                HttpsURLConnection.setDefaultHostnameVerifier((hostname, sessionSSL) -> true);
+
+                String direccionCodificada = URLEncoder.encode(direccion, "UTF-8");
+                String urlStr = "https://nominatim.openstreetmap.org/search?q=" + direccionCodificada + "&format=json&limit=1";
+
+                URL url = new URL(urlStr);
+                HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+                con.setRequestMethod("GET");
+                con.setRequestProperty("User-Agent", "MiRestauranteApp/1.0 (contreras10@openai.com)");
+
+                int responseCode = con.getResponseCode();
+                System.out.println("✅ Código HTTP respuesta: " + responseCode);
+
+                if (responseCode == 200) {
+                    BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
+                    StringBuilder json = new StringBuilder();
+                    String inputLine;
+                    while ((inputLine = in.readLine()) != null) {
+                        json.append(inputLine);
+                    }
+                    in.close();
+
+                    System.out.println("🔍 JSON recibido de Nominatim:");
+                    System.out.println(json.toString());
+
+                    JSONArray array = new JSONArray(json.toString());
+                    if (!array.isEmpty()) {
+                        JSONObject obj = array.getJSONObject(0);
+                        double lat = obj.getDouble("lat");
+                        double lon = obj.getDouble("lon");
+                        session.setAttribute("latCliente", lat);
+                        session.setAttribute("lonCliente", lon);
+                        System.out.println("✅ Coordenadas cliente: " + lat + ", " + lon);
+                    } else {
+                        session.setAttribute("latCliente", -12.1070);
+                        session.setAttribute("lonCliente", -77.0050);
+                    }
+                } else {
+                    System.out.println("❌ Nominatim no devolvió respuesta válida.");
+                    session.setAttribute("latCliente", -12.1070);
+                    session.setAttribute("lonCliente", -77.0050);
+                }
+
+            } catch (Exception e) {
+                System.out.println("⚠️ Error al obtener coordenadas del cliente:");
+                e.printStackTrace();
+                session.setAttribute("latCliente", -12.1070);
+                session.setAttribute("lonCliente", -77.0050);
+            }
+
             StringBuilder descripcion = new StringBuilder();
             for (DetallePedido d : pedido.getDetalles()) {
                 descripcion.append(d.getNombrePlato())
-                           .append(" - S/")
-                           .append(d.getPrecioUnitario())
-                           .append(", ");
+                        .append(" - S/")
+                        .append(d.getPrecioUnitario())
+                        .append(", ");
             }
             if (descripcion.length() > 0) {
-                descripcion.setLength(descripcion.length() - 2); // quitar última coma
+                descripcion.setLength(descripcion.length() - 2);
             }
 
             session.setAttribute("ultimoPedidoDescripcion", descripcion.toString());
             session.setAttribute("ultimoPedidoDireccion", direccion);
-            session.setAttribute("ultimoPedidoTelefono", request.getParameter("telefono")); // si lo capturas
+            session.setAttribute("ultimoPedidoTelefono", request.getParameter("telefono"));
             session.setAttribute("ultimoMetodoPago", metodoPagoStr);
 
-            // Redirigir a la boleta
             response.sendRedirect("pedido_confirmado.jsp");
         } else {
             response.sendRedirect("error.jsp");
         }
     }
 }
-
 
 

@@ -10,13 +10,11 @@
     String telefono = (String) session.getAttribute("ultimoPedidoTelefono");
     String metodoPago = (String) session.getAttribute("ultimoMetodoPago");
 
-    // Coordenadas DINÁMICAS del restaurante y cliente desde sesión
     Double latRestaurante = (Double) session.getAttribute("latRestaurante");
     Double lonRestaurante = (Double) session.getAttribute("lonRestaurante");
     Double latCliente = (Double) session.getAttribute("latCliente");
     Double lonCliente = (Double) session.getAttribute("lonCliente");
 
-    // Valores por defecto si alguna coord es nula
     if (latRestaurante == null) latRestaurante = -12.1220;
     if (lonRestaurante == null) lonRestaurante = -77.0300;
     if (latCliente == null) latCliente = -12.1070;
@@ -28,9 +26,7 @@
     <meta charset="UTF-8">
     <title>Seguimiento del Pedido</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <style>
         body {
@@ -155,22 +151,30 @@
 
 <!-- Leaflet Mapa -->
 <script>
-    var map = L.map('map').setView([<%= (latRestaurante + latCliente)/2 %>, <%= (lonRestaurante + lonCliente)/2 %>], 14);
+    const latRestaurante = <%= latRestaurante %>;
+    const lonRestaurante = <%= lonRestaurante %>;
+    const latCliente = <%= latCliente %>;
+    const lonCliente = <%= lonCliente %>;
+
+    const centroLat = (latRestaurante + latCliente) / 2;
+    const centroLon = (lonRestaurante + lonCliente) / 2;
+
+    const map = L.map('map').setView([centroLat, centroLon], 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap'
+        maxZoom: 18,
+        attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
-    L.marker([<%= latRestaurante %>, <%= lonRestaurante %>])
+    L.marker([latRestaurante, lonRestaurante])
         .addTo(map)
-        .bindPopup("📍 Restaurante");
+        .bindPopup("📍 Restaurante")
+        .openPopup();
 
-    L.marker([<%= latCliente %>, <%= lonCliente %>])
+    L.marker([latCliente, lonCliente])
         .addTo(map)
         .bindPopup("🏠 Entrega");
 </script>
 
 </body>
 </html>
-

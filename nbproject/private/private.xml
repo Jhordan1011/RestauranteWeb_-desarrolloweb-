@@ -9,6 +9,7 @@
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/resumenPedido.jsp</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/carrito.jsp</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/AdminI.jsp</file>
+            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/vistas/platos/ver_platos.jsp</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/FinalizarPedidoServlet.java</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/pago.jsp</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/GenerarPDFServlet.java</file>
@@ -41,6 +42,7 @@
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/UsuarioController.java</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/PedidoServlet.java</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/AgregarCarrito.java</file>
+            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/modelo/dao/RestauranteDAO.java</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/strategy/PagoEfectivo.java</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/modelo/Restaurante.java</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/modelo/ItemCarrito.java</file>
