@@ -4,11 +4,14 @@
     Author     : User
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %> <!-- ✅ IMPORT NECESARIO -->
 <%
     String descripcion = (String) session.getAttribute("ultimoPedidoDescripcion");
     String direccion = (String) session.getAttribute("ultimoPedidoDireccion");
     String telefono = (String) session.getAttribute("ultimoPedidoTelefono");
     String metodoPago = (String) session.getAttribute("ultimoMetodoPago");
+
+    List<modelo.Restaurante> restaurantesInvolucrados = (List<modelo.Restaurante>) session.getAttribute("restaurantesInvolucrados");
 
     Double latRestaurante = (Double) session.getAttribute("latRestaurante");
     Double lonRestaurante = (Double) session.getAttribute("lonRestaurante");
@@ -83,8 +86,19 @@
     <h2 class="text-center mb-4">📦 Seguimiento de tu Pedido</h2>
 
     <div class="estado-pedido">
-        <strong>Estado actual:</strong> En camino 🛵
+        <strong>Estado actual:</strong> <span id="estadoTexto">🧑‍🍳 Preparando pedido...</span>
     </div>
+
+    <% if (restaurantesInvolucrados != null && !restaurantesInvolucrados.isEmpty()) { %>
+        <h4>🏠 Restaurante(s) involucrado(s):</h4>
+        <ul>
+        <% for (modelo.Restaurante r : restaurantesInvolucrados) { %>
+            <li>
+                <strong><%= r.getNombre() %></strong> – <%= r.getDireccion() %>
+            </li>
+        <% } %>
+        </ul>
+    <% } %>
 
     <h4>📍 Dirección de entrega:</h4>
     <p><%= direccion != null ? direccion : "No disponible" %></p>
@@ -149,7 +163,6 @@
 
 </div>
 
-<!-- Leaflet Mapa -->
 <script>
     const latRestaurante = <%= latRestaurante %>;
     const lonRestaurante = <%= lonRestaurante %>;
@@ -174,7 +187,17 @@
     L.marker([latCliente, lonCliente])
         .addTo(map)
         .bindPopup("🏠 Entrega");
+
+    const estadoTexto = document.getElementById("estadoTexto");
+    setTimeout(() => {
+        estadoTexto.innerText = "🛵 En camino...";
+    }, 5000);
+    setTimeout(() => {
+        estadoTexto.innerText = "✅ Entregado";
+    }, 15000);
 </script>
 
 </body>
 </html>
+
+

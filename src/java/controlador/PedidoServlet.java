@@ -42,7 +42,7 @@ public class PedidoServlet extends HttpServlet {
         System.out.println("Restaurante recibido en PedidoServlet: " + restauranteId);
 
         // ✅ 4. Asignar restauranteId al pedido directamente (CORRECCIÓN)
-        pedido.setRestauranteId(restauranteId);
+        
 
         // 5. Crear el detalle del pedido
         DetallePedido detalle = new DetallePedido();

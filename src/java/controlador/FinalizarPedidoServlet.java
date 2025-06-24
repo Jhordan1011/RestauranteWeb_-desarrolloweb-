@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.cert.X509Certificate;
+import java.util.*;
 
 @WebServlet(name = "FinalizarPedidoServlet", value = "/FinalizarPedidoServlet")
 public class FinalizarPedidoServlet extends HttpServlet {
@@ -45,16 +46,44 @@ public class FinalizarPedidoServlet extends HttpServlet {
 
         if (exito) {
             RestauranteDAO restauranteDAO = new RestauranteDAO();
-            Restaurante restaurante = restauranteDAO.buscarPorId(pedido.getRestauranteId());
-            if (restaurante != null) {
-                session.setAttribute("latRestaurante", restaurante.getLatitud());
-                session.setAttribute("lonRestaurante", restaurante.getLongitud());
-            } else {
-                session.setAttribute("latRestaurante", -12.1220);
-                session.setAttribute("lonRestaurante", -77.0300);
+
+            // ✅ Obtener restaurantes involucrados en el pedido
+            Set<Integer> idsRestaurantes = new HashSet<>();
+            for (DetallePedido detalle : pedido.getDetalles()) {
+                idsRestaurantes.add(detalle.getRestauranteId());
             }
 
-            // ✅ Ignorar SSL en entorno de desarrollo
+            List<Restaurante> restaurantesInvolucrados = new ArrayList<>();
+            for (int id : idsRestaurantes) {
+                Restaurante r = restauranteDAO.buscarPorId(id);
+                if (r != null) {
+                    restaurantesInvolucrados.add(r);
+                }
+            }
+
+            // ✅ Guardar en sesión
+            session.setAttribute("restaurantesInvolucrados", restaurantesInvolucrados);
+
+            // Coordenadas del primer restaurante (para el mapa)
+// Obtener primer restaurante de los involucrados (para el mapa)
+Restaurante restauranteMapa = null;
+if (!restaurantesInvolucrados.isEmpty()) {
+    restauranteMapa = restaurantesInvolucrados.get(0);
+}
+
+if (restauranteMapa != null) {
+    session.setAttribute("latRestaurante", restauranteMapa.getLatitud());
+    session.setAttribute("lonRestaurante", restauranteMapa.getLongitud());
+    session.setAttribute("ultimoPedidoTelefono", restauranteMapa.getTelefono());
+} else {
+    session.setAttribute("latRestaurante", -12.1220);
+    session.setAttribute("lonRestaurante", -77.0300);
+    session.setAttribute("ultimoPedidoTelefono", "No disponible");
+}
+
+
+
+            // Geolocalizar dirección del cliente con Nominatim
             try {
                 TrustManager[] trustAllCerts = new TrustManager[]{
                     new X509TrustManager() {
@@ -67,8 +96,6 @@ public class FinalizarPedidoServlet extends HttpServlet {
                 SSLContext sc = SSLContext.getInstance("SSL");
                 sc.init(null, trustAllCerts, new java.security.SecureRandom());
                 HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
-
-                // Ignora verificación de nombre de host
                 HttpsURLConnection.setDefaultHostnameVerifier((hostname, sessionSSL) -> true);
 
                 String direccionCodificada = URLEncoder.encode(direccion, "UTF-8");
@@ -80,7 +107,6 @@ public class FinalizarPedidoServlet extends HttpServlet {
                 con.setRequestProperty("User-Agent", "MiRestauranteApp/1.0 (contreras10@openai.com)");
 
                 int responseCode = con.getResponseCode();
-                System.out.println("✅ Código HTTP respuesta: " + responseCode);
 
                 if (responseCode == 200) {
                     BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream(), "UTF-8"));
@@ -91,9 +117,6 @@ public class FinalizarPedidoServlet extends HttpServlet {
                     }
                     in.close();
 
-                    System.out.println("🔍 JSON recibido de Nominatim:");
-                    System.out.println(json.toString());
-
                     JSONArray array = new JSONArray(json.toString());
                     if (!array.isEmpty()) {
                         JSONObject obj = array.getJSONObject(0);
@@ -101,24 +124,21 @@ public class FinalizarPedidoServlet extends HttpServlet {
                         double lon = obj.getDouble("lon");
                         session.setAttribute("latCliente", lat);
                         session.setAttribute("lonCliente", lon);
-                        System.out.println("✅ Coordenadas cliente: " + lat + ", " + lon);
                     } else {
                         session.setAttribute("latCliente", -12.1070);
                         session.setAttribute("lonCliente", -77.0050);
                     }
                 } else {
-                    System.out.println("❌ Nominatim no devolvió respuesta válida.");
                     session.setAttribute("latCliente", -12.1070);
                     session.setAttribute("lonCliente", -77.0050);
                 }
 
             } catch (Exception e) {
-                System.out.println("⚠️ Error al obtener coordenadas del cliente:");
-                e.printStackTrace();
                 session.setAttribute("latCliente", -12.1070);
                 session.setAttribute("lonCliente", -77.0050);
             }
 
+            // Guardar resumen de platos para la boleta
             StringBuilder descripcion = new StringBuilder();
             for (DetallePedido d : pedido.getDetalles()) {
                 descripcion.append(d.getNombrePlato())
@@ -132,7 +152,6 @@ public class FinalizarPedidoServlet extends HttpServlet {
 
             session.setAttribute("ultimoPedidoDescripcion", descripcion.toString());
             session.setAttribute("ultimoPedidoDireccion", direccion);
-            session.setAttribute("ultimoPedidoTelefono", request.getParameter("telefono"));
             session.setAttribute("ultimoMetodoPago", metodoPagoStr);
 
             response.sendRedirect("pedido_confirmado.jsp");
@@ -141,5 +160,8 @@ public class FinalizarPedidoServlet extends HttpServlet {
         }
     }
 }
+
+
+
 
 
