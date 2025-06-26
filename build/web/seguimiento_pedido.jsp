@@ -4,25 +4,36 @@
     Author     : User
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.List" %> <!-- ✅ IMPORT NECESARIO -->
+<%@ page import="java.util.List" %>
+<%@ page import="org.json.JSONArray" %>
+<%@ page import="org.json.JSONObject" %>
+
 <%
     String descripcion = (String) session.getAttribute("ultimoPedidoDescripcion");
     String direccion = (String) session.getAttribute("ultimoPedidoDireccion");
-    String telefono = (String) session.getAttribute("ultimoPedidoTelefono");
+    String telefonos = (String) session.getAttribute("telefonosRestaurantes");
     String metodoPago = (String) session.getAttribute("ultimoMetodoPago");
 
     List<modelo.Restaurante> restaurantesInvolucrados = (List<modelo.Restaurante>) session.getAttribute("restaurantesInvolucrados");
 
-    Double latRestaurante = (Double) session.getAttribute("latRestaurante");
-    Double lonRestaurante = (Double) session.getAttribute("lonRestaurante");
     Double latCliente = (Double) session.getAttribute("latCliente");
     Double lonCliente = (Double) session.getAttribute("lonCliente");
 
-    if (latRestaurante == null) latRestaurante = -12.1220;
-    if (lonRestaurante == null) lonRestaurante = -77.0300;
     if (latCliente == null) latCliente = -12.1070;
     if (lonCliente == null) lonCliente = -77.0050;
+
+    JSONArray restaurantesArray = new JSONArray();
+    if (restaurantesInvolucrados != null) {
+        for (modelo.Restaurante r : restaurantesInvolucrados) {
+            JSONObject obj = new JSONObject();
+            obj.put("nombre", r.getNombre());
+            obj.put("latitud", r.getLatitud());
+            obj.put("longitud", r.getLongitud());
+            restaurantesArray.put(obj);
+        }
+    }
 %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -30,7 +41,9 @@
     <title>Seguimiento del Pedido</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.min.js"></script>
     <style>
         body {
             background: linear-gradient(to bottom, #1a1a1a, #333);
@@ -103,8 +116,8 @@
     <h4>📍 Dirección de entrega:</h4>
     <p><%= direccion != null ? direccion : "No disponible" %></p>
 
-    <h4>📞 Teléfono de contacto:</h4>
-    <p><%= telefono != null ? telefono : "No disponible" %></p>
+    <h4>📞 Teléfonos de contacto:</h4>
+    <p><%= telefonos != null ? telefonos : "No disponible" %></p>
 
     <h4>💳 Método de pago:</h4>
     <p><%= metodoPago != null ? metodoPago : "No especificado" %></p>
@@ -164,13 +177,22 @@
 </div>
 
 <script>
-    const latRestaurante = <%= latRestaurante %>;
-    const lonRestaurante = <%= lonRestaurante %>;
     const latCliente = <%= latCliente %>;
     const lonCliente = <%= lonCliente %>;
+    const restaurantes = JSON.parse('<%= restaurantesArray.toString().replaceAll("\"", "\\\"") %>');
 
-    const centroLat = (latRestaurante + latCliente) / 2;
-    const centroLon = (lonRestaurante + lonCliente) / 2;
+    let totalLat = latCliente;
+    let totalLon = lonCliente;
+    let count = 1;
+
+    restaurantes.forEach(r => {
+        totalLat += r.latitud;
+        totalLon += r.longitud;
+        count++;
+    });
+
+    const centroLat = totalLat / count;
+    const centroLon = totalLon / count;
 
     const map = L.map('map').setView([centroLat, centroLon], 13);
 
@@ -179,25 +201,40 @@
         attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
-    L.marker([latRestaurante, lonRestaurante])
-        .addTo(map)
-        .bindPopup("📍 Restaurante")
-        .openPopup();
-
+    // Marcador cliente
     L.marker([latCliente, lonCliente])
         .addTo(map)
-        .bindPopup("🏠 Entrega");
+        .bindPopup("🏠 Dirección de entrega");
 
+    // Marcadores y rutas desde restaurantes
+    restaurantes.forEach(r => {
+        const marker = L.marker([r.latitud, r.longitud])
+            .addTo(map)
+            .bindPopup("📍 Restaurante: " + r.nombre);
+
+        // Dibujar ruta
+        L.Routing.control({
+            waypoints: [
+                L.latLng(r.latitud, r.longitud),
+                L.latLng(latCliente, lonCliente)
+            ],
+            routeWhileDragging: false,
+            draggableWaypoints: false,
+            addWaypoints: false,
+            show: false,
+            createMarker: () => null
+        }).addTo(map);
+    });
+
+    // Estado animado
     const estadoTexto = document.getElementById("estadoTexto");
-    setTimeout(() => {
-        estadoTexto.innerText = "🛵 En camino...";
-    }, 5000);
-    setTimeout(() => {
-        estadoTexto.innerText = "✅ Entregado";
-    }, 15000);
+    setTimeout(() => estadoTexto.innerText = "🛵 En camino...", 5000);
+    setTimeout(() => estadoTexto.innerText = "✅ Entregado", 15000);
 </script>
 
 </body>
 </html>
+
+
 
 

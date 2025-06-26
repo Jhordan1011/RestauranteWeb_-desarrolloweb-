@@ -79,7 +79,7 @@ public class RegistrarPedidoController extends HttpServlet {
         String resultadoPago = procesador.procesar();
 
         try (
-            Connection con = Conexion.getInstancia().getConexion(); // 🔷 Uso del patrón Singleton
+            Connection con = Conexion.getConnection(); // 🔷 Uso del patrón Singleton
             PreparedStatement ps = con.prepareStatement(
                 "INSERT INTO pedidos (id_usuario, direccion, telefono, descripcion, metodo_pago) VALUES (?, ?, ?, ?, ?)")
         ) {

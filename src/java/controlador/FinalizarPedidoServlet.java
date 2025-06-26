@@ -58,6 +58,7 @@ public class FinalizarPedidoServlet extends HttpServlet {
                 Restaurante r = restauranteDAO.buscarPorId(id);
                 if (r != null) {
                     restaurantesInvolucrados.add(r);
+                    System.out.println("✔ Restaurante agregado: " + r.getNombre());
                 }
             }
 
@@ -74,11 +75,18 @@ if (!restaurantesInvolucrados.isEmpty()) {
 if (restauranteMapa != null) {
     session.setAttribute("latRestaurante", restauranteMapa.getLatitud());
     session.setAttribute("lonRestaurante", restauranteMapa.getLongitud());
-    session.setAttribute("ultimoPedidoTelefono", restauranteMapa.getTelefono());
+  
+StringBuilder telefonos = new StringBuilder();
+for (Restaurante r : restaurantesInvolucrados) {
+    telefonos.append(r.getNombre()).append(": ").append(r.getTelefono()).append("<br>");
+}
+session.setAttribute("telefonosRestaurantes", telefonos.toString());
+
+    
 } else {
     session.setAttribute("latRestaurante", -12.1220);
     session.setAttribute("lonRestaurante", -77.0300);
-    session.setAttribute("ultimoPedidoTelefono", "No disponible");
+    
 }
 
 

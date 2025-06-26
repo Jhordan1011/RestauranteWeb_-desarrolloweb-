@@ -18,7 +18,8 @@ public class PedidoFacade {
     public boolean guardarPedido(Pedido pedido) {
         Connection conn = null;
         try {
-            conn = Conexion.getInstancia().getConexion();
+            conn = Conexion.getConnection();
+
             conn.setAutoCommit(false);
             
             

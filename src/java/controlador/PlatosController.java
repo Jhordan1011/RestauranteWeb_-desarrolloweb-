@@ -37,7 +37,8 @@ public class PlatosController extends HttpServlet {
         
         try {
             // Usamos getInstancia().getConexion() en lugar de getConnection()
-            conn = Conexion.getInstancia().getConexion();
+            conn = Conexion.getConnection();
+
             String sql = "SELECT * FROM platos WHERE restaurante_id = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, restauranteId);

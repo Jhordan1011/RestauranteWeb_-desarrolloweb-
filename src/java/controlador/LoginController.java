@@ -21,7 +21,8 @@ public class LoginController extends HttpServlet {
         String contrasena = request.getParameter("contrasena");
 
         try {
-            Connection con = Conexion.getInstancia().getConexion();
+            Connection con = Conexion.getConnection();
+
             String sql = "SELECT * FROM usuario WHERE correo = ? AND contrasena = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, correo);
