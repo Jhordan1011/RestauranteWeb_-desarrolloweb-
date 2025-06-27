@@ -170,9 +170,12 @@
     <h4 class="mt-5">🗺 Mapa de ubicación</h4>
     <div id="map"></div>
 
-    <div class="text-center mt-4">
-        <a href="seleccionar_restaurante.jsp" class="btn btn-primary">🛒 Hacer otro pedido</a>
-    </div>
+    <div class="text-center mt-4 d-flex justify-content-center gap-3">
+    <a href="<%= request.getContextPath() %>/restaurantes" class="btn btn-primary">🔙 Volver al Menú</a>
+    <a href="login.jsp" class="btn btn-danger">🚪 Cerrar Sesión</a>
+</div>
+
+
 
 </div>
 
