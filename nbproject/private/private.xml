@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/boleta.jsp</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/registro.jsp</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/CarritoServlet.java</file>
@@ -46,6 +47,23 @@
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/strategy/PagoEfectivo.java</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/modelo/Restaurante.java</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/modelo/ItemCarrito.java</file>
+=======
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/PedidoServlet.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/strategy/MetodoPago.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/FinalizarPedidoServlet.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/CarritoServlet.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/modelo/DetallePedido.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/modelo/Restaurante.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/strategy/PagoEfectivo.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/strategy/PagoTarjeta.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/strategy/PagoYape.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/strategy/ProcesadorPago.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/GenerarPDFServlet.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/web/AdminI.jsp</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/modelo/Pedido.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/RegistrarPedidoController.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/modelo/Usuario.java</file>
+>>>>>>> 90c4930c7e18926577fe09f4b53a057758600cee
         </group>
     </open-files>
 </project-private>
