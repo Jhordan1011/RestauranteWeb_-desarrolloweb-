@@ -172,7 +172,8 @@
 
     <div class="text-center mt-4 d-flex justify-content-center gap-3">
     <a href="<%= request.getContextPath() %>/restaurantes" class="btn btn-primary">🔙 Volver al Menú</a>
-    <a href="login.jsp" class="btn btn-danger">🚪 Cerrar Sesión</a>
+    <a href="logout" class="btn btn-danger">🚪 Cerrar sesión</a>
+
 </div>
 
 

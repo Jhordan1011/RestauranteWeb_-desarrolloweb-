@@ -10,4 +10,3 @@ public class PagoEfectivo implements MetodoPago {
         return "Pago realizado en Efectivo.";
     }
 }
-

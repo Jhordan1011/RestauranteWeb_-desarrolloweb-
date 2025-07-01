@@ -47,7 +47,7 @@ public class FinalizarPedidoServlet extends HttpServlet {
         if (exito) {
             RestauranteDAO restauranteDAO = new RestauranteDAO();
 
-            // ✅ Obtener restaurantes involucrados en el pedido
+            // Obtener restaurantes involucrados en el pedido
             Set<Integer> idsRestaurantes = new HashSet<>();
             for (DetallePedido detalle : pedido.getDetalles()) {
                 idsRestaurantes.add(detalle.getRestauranteId());
@@ -62,10 +62,10 @@ public class FinalizarPedidoServlet extends HttpServlet {
                 }
             }
 
-            // ✅ Guardar en sesión
+            //  Guardar en sesión
             session.setAttribute("restaurantesInvolucrados", restaurantesInvolucrados);
 
-            // Coordenadas del primer restaurante (para el mapa)
+            
 // Obtener primer restaurante de los involucrados (para el mapa)
 Restaurante restauranteMapa = null;
 if (!restaurantesInvolucrados.isEmpty()) {
