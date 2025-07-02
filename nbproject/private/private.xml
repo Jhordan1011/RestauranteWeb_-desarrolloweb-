@@ -4,6 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/boleta.jsp</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/registro.jsp</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/CarritoServlet.java</file>
@@ -64,6 +65,12 @@
             <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/RegistrarPedidoController.java</file>
             <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/modelo/Usuario.java</file>
 >>>>>>> 90c4930c7e18926577fe09f4b53a057758600cee
+=======
+            <file>file:/C:/Users/ASUS/Pictures/Camera%20Roll/CLONADO%20WEB/RestauranteWeb_-desarrolloweb-/web/AdminI.jsp</file>
+            <file>file:/C:/Users/ASUS/Pictures/Camera%20Roll/CLONADO%20WEB/RestauranteWeb_-desarrolloweb-/src/java/controlador/VerPedidosServlet.java</file>
+            <file>file:/C:/Users/ASUS/Pictures/Camera%20Roll/CLONADO%20WEB/RestauranteWeb_-desarrolloweb-/src/java/controlador/LoginController.java</file>
+            <file>file:/C:/Users/ASUS/Pictures/Camera%20Roll/CLONADO%20WEB/RestauranteWeb_-desarrolloweb-/src/java/util/Conexion.java</file>
+>>>>>>> 4eb7700a4483aca125de5aa5b12d6b88f73e179b
         </group>
     </open-files>
 </project-private>
