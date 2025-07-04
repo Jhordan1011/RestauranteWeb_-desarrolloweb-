@@ -19,7 +19,6 @@
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/seguimiento_pedido.jsp</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/modelo/Platos.java</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/EliminarItemCarritoController.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/modelo/dao/PedidoDAO.java</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/strategy/MetodoPago.java</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/strategy/ProcesadorPago.java</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/util/Conexion.java</file>
@@ -27,7 +26,6 @@
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/fachada/PedidoFacade.java</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/modelo/DetallePedido.java</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/strategy/PagoTarjeta.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/PedidosAdminServlet.java</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/LoginController.java</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/strategy/PagoYape.java</file>
             <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/login.jsp</file>
