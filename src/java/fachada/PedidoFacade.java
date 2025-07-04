@@ -96,6 +96,38 @@ public class PedidoFacade {
         }
         return lista;
     }
+    
+    public boolean editarPedido(Pedido pedido) {
+    Connection conn = null;
+    try {
+        conn = Conexion.getConnection();
+        conn.setAutoCommit(false);
+
+        String sql = "UPDATE pedidos SET estado = ?, direccion_entrega = ?, notas = ?, metodo_pago = ? WHERE id = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, pedido.getEstado().toLowerCase());
+        ps.setString(2, pedido.getDireccionEntrega());
+        ps.setString(3, pedido.getNotas() != null ? pedido.getNotas() : "");
+        ps.setString(4, pedido.getMetodoPago().name());
+        ps.setInt(5, pedido.getId());
+
+        int rowsUpdated = ps.executeUpdate();
+        conn.commit();
+        
+        return rowsUpdated > 0; 
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        try {
+            if (conn != null) conn.rollback();
+        } catch (Exception rollbackEx) {
+            rollbackEx.printStackTrace();
+        }
+        return false;
+    }
+}
+
+    
 }
 
 
