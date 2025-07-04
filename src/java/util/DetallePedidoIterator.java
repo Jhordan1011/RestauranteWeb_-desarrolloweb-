@@ -23,3 +23,4 @@ public class DetallePedidoIterator {
         return lista.get(posicion++);
     }
 }
+aa
