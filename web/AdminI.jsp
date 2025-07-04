@@ -91,25 +91,25 @@
             <td><%= p.getNotas() %></td>
             <td><%= p.getMetodoPago() %></td>
             <td>
-              <button class="btn btn-sm btn-outline-primary me-1"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalEditarPedido"
-                      onclick="llenarModalEditar(
-                        '<%= p.getId() %>',
-                        '<%= p.getDireccionEntrega().replace("'", "\\'") %>',
-                        '<%= p.getNotas().replace("'", "\\'") %>',
-                        '<%= p.getMetodoPago() %>',
-                        '<%= p.getEstado() %>'
-                      )">
-                <i class="bi bi-pencil-square"></i>
-              </button>
-              <button class="btn btn-sm btn-outline-danger"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalEliminarPedido"
-                      onclick="llenarModalEliminar('<%= p.getId() %>')">
-                <i class="bi bi-trash"></i>
-              </button>
-            </td>
+    <button class="btn btn-sm btn-outline-primary me-1"
+            data-bs-toggle="modal"
+            data-bs-target="#modalEditarPedido"
+            onclick="llenarModalEditar(
+                '<%= p.getId() %>',
+                '<%= p.getDireccionEntrega().replace("\"", "\\\"") %>',
+                '<%= p.getNotas() != null ? p.getNotas().replace("\"", "\\\"") : "" %>',
+                '<%= p.getMetodoPago() %>',
+                '<%= p.getEstado() %>'
+            )">
+        <i class="bi bi-pencil-square"></i>
+    </button>
+    <button class="btn btn-sm btn-outline-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#modalEliminarPedido"
+            onclick="llenarModalEliminar('<%= p.getId() %>')">
+        <i class="bi bi-trash"></i>
+    </button>
+</td>
           </tr>
           <% } 
              } else { %>
@@ -120,52 +120,52 @@
     </div>
   </div>
 
-  <!-- Modal Editar Pedido -->
-  <div class="modal fade" id="modalEditarPedido" tabindex="-1" aria-labelledby="modalEditarPedidoLabel" aria-hidden="true">
+ <!-- Modal Editar Pedido -->
+<div class="modal fade" id="modalEditarPedido" tabindex="-1" aria-labelledby="modalEditarPedidoLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title" id="modalEditarPedidoLabel">Editar Pedido</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="modalEditarPedidoLabel">Editar Pedido #<span id="pedidoNumero"></span></h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="EditarPedidoServlet" id="formEditarPedido">
+                    <input type="hidden" id="pedidoId" name="id">
+                    <div class="mb-3">
+                        <label class="form-label">Estado</label>
+                        <select class="form-select" id="estadoPedido" name="estado" required>
+                            <option value="procesando">Procesando</option>
+                            <option value="entregado">Entregado</option>
+                            <option value="cancelado">Cancelado</option>
+                            <option value="pendiente">Pendiente</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Dirección</label>
+                        <input type="text" class="form-control" id="direccionPedido" name="direccion" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Notas</label>
+                        <textarea class="form-control" rows="3" id="notasPedido" name="notas"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Método de Pago</label>
+                        <select class="form-select" id="metodoPagoPedido" name="metodoPago" required>
+                            <option value="TARJETA">Tarjeta</option>
+                            <option value="YAPE">Yape</option>
+                            <option value="EFECTIVO">Efectivo</option>
+                            <option value="TRANSFERENCIA">Transferencia</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="modal-body">
-          <form method="post" action="EditarPedidoServlet">
-            <input type="hidden" id="pedidoId" name="id">
-            <div class="mb-3">
-              <label class="form-label">Estado</label>
-              <select class="form-select" id="estadoPedido" name="estado">
-                <option>Procesando</option>
-                <option>Entregado</option>
-                <option>Cancelado</option>
-                <option>Pendiente</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Dirección</label>
-              <input type="text" class="form-control" id="direccionPedido" name="direccion">
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Notas</label>
-              <textarea class="form-control" rows="3" id="notasPedido" name="notas"></textarea>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Método de Pago</label>
-              <select class="form-select" id="metodoPagoPedido" name="metodoPago">
-                <option>Tarjeta</option>
-                <option>Yape</option>
-                <option>Efectivo</option>
-                <option>Transferencia</option>
-              </select>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-            </div>
-          </form>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
   <!-- Modal Eliminar Pedido -->
   <div class="modal fade" id="modalEliminarPedido" tabindex="-1" aria-labelledby="modalEliminarPedidoLabel" aria-hidden="true">
@@ -190,26 +190,46 @@
   </div>
 
   <!-- Scripts -->
-  <script>
-    function mostrarSeccion(id) {
-      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      document.querySelectorAll('.list-group-item').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
+ <script>
+function llenarModalEditar(id, direccion, notas, metodoPago, estado) {
+    // Mostrar el ID del pedido en el título
+    document.getElementById("pedidoNumero").textContent = id;
+    
+    // Llenar campos del formulario
+    document.getElementById("pedidoId").value = id;
+    document.getElementById("direccionPedido").value = direccion;
+    document.getElementById("notasPedido").value = notas || "";
+    
+    // Seleccionar el estado correcto
+    const estadoSelect = document.getElementById("estadoPedido");
+    for (let i = 0; i < estadoSelect.options.length; i++) {
+        if (estadoSelect.options[i].value === estado.toLowerCase()) {
+            estadoSelect.selectedIndex = i;
+            break;
+        }
     }
+    
+    // Seleccionar el método de pago correcto
+    const metodoPagoSelect = document.getElementById("metodoPagoPedido");
+    for (let i = 0; i < metodoPagoSelect.options.length; i++) {
+        if (metodoPagoSelect.options[i].value === metodoPago.toUpperCase()) {
+            metodoPagoSelect.selectedIndex = i;
+            break;
+        }
+    }
+}
 
-    function llenarModalEditar(id, direccion, notas, metodoPago, estado) {
-      document.getElementById("pedidoId").value = id;
-      document.getElementById("direccionPedido").value = direccion;
-      document.getElementById("notasPedido").value = notas;
-      document.getElementById("metodoPagoPedido").value = metodoPago;
-      document.getElementById("estadoPedido").value = estado;
+// Validación del formulario antes de enviar
+document.getElementById("formEditarPedido").addEventListener("submit", function(e) {
+    const direccion = document.getElementById("direccionPedido").value.trim();
+    if (!direccion) {
+        e.preventDefault();
+        alert("La dirección es requerida");
+        return false;
     }
-
-    function llenarModalEliminar(id) {
-      document.getElementById("pedidoEliminarId").value = id;
-    }
-  </script>
+    return true;
+});
+</script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
