@@ -1009,10 +1009,17 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${libs.jakartaee-web-api-10.0.classpath}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.mysql-connector-j-9.2.0.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.itextpdf-5.5.13.3.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+<<<<<<< HEAD
+        <copyfiles files="${file.reference.mysql-connector-j-9.2.0.jar-1}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+=======
         <copyfiles files="${file.reference.json-20230227.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.javax.el-api-3.0.0.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.jsf-api-2.2.20.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.jsf-impl-2.2.20.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+<<<<<<< HEAD
+=======
+>>>>>>> bd9eedbf70e1593ba47c80073c29148de7bf717d
+>>>>>>> 24009a6da569ccfde9474c218ae827de276fa30b
         <mkdir dir="${build.web.dir}/META-INF"/>
         <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update"/>
     </target>
@@ -1020,10 +1027,17 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${libs.jakartaee-web-api-10.0.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.mysql-connector-j-9.2.0.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.itextpdf-5.5.13.3.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+<<<<<<< HEAD
+        <copyfiles files="${file.reference.mysql-connector-j-9.2.0.jar-1}" todir="${build.web.dir}/WEB-INF/lib"/>
+=======
         <copyfiles files="${file.reference.json-20230227.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.javax.el-api-3.0.0.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.jsf-api-2.2.20.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.jsf-impl-2.2.20.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+<<<<<<< HEAD
+=======
+>>>>>>> bd9eedbf70e1593ba47c80073c29148de7bf717d
+>>>>>>> 24009a6da569ccfde9474c218ae827de276fa30b
     </target>
     <target depends="init" if="dist.ear.dir" name="-clean-webinf-lib">
         <delete dir="${build.web.dir}/WEB-INF/lib"/>
