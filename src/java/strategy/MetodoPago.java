@@ -7,4 +7,3 @@ package strategy;
 public interface MetodoPago {
     String procesarPago();
 }
-

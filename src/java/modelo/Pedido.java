@@ -15,6 +15,7 @@ public class Pedido {
     private String notas;
     private MetodoPago metodoPago;
     private List<DetallePedido> detalles = new ArrayList<>();
+    private int restauranteId;
 
     public enum MetodoPago {
         EFECTIVO, TARJETA, TRANSFERENCIA, YAPE
@@ -99,5 +100,13 @@ public class Pedido {
     public void setDetalles(List<DetallePedido> detalles) {
         this.detalles = detalles;
     }
+    
+    public int getRestauranteId() {
+    return restauranteId;
+}
+
+public void setRestauranteId(int restauranteId) {
+    this.restauranteId = restauranteId;
+}
 }
 

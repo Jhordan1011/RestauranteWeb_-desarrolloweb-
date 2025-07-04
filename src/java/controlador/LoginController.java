@@ -21,7 +21,8 @@ public class LoginController extends HttpServlet {
         String contrasena = request.getParameter("contrasena");
 
         try {
-            Connection con = Conexion.getInstancia().getConexion();
+            Connection con = Conexion.getConnection();
+
             String sql = "SELECT * FROM usuario WHERE correo = ? AND contrasena = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, correo);
@@ -46,10 +47,11 @@ public class LoginController extends HttpServlet {
                 
                 // Redirección basada en el rol
                 if ("ADMINISTRADOR".equalsIgnoreCase(usuario.getRol())) {
-                    response.sendRedirect("adminPedidos");
-                } else {
-                    response.sendRedirect(request.getContextPath() + "/restaurantes");
-                }
+    response.sendRedirect("admin/pedidos"); // Redirige al servlet que carga la data
+} else {
+    response.sendRedirect(request.getContextPath() + "/restaurantes");
+}
+
             } else {
                  response.sendRedirect("login.jsp?error=1");
             }

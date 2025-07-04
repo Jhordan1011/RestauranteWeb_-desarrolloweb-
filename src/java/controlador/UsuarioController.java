@@ -12,6 +12,7 @@ import java.sql.*;
 
 @WebServlet("/UsuarioController")
 public class UsuarioController extends HttpServlet {
+Connection con = Conexion.getConnection();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nombreCompleto = request.getParameter("nombreCompleto");
@@ -31,7 +32,9 @@ public class UsuarioController extends HttpServlet {
         }
 
         try {
-            Connection con = Conexion.getInstancia().getConexion();
+            con = Conexion.getConnection();
+
+
             if (con == null) {
                 System.out.println("Error: conexión nula");
                 response.sendRedirect("registro.jsp?error=conexion");

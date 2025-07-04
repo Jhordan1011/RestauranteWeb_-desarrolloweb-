@@ -18,11 +18,15 @@ import java.sql.*;
 
 @WebServlet("/restaurantes")
 public class RestauranteController extends HttpServlet{
-    
+ Connection con = Conexion.getConnection();
+   
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
         List<Restaurante> restaurantes = new ArrayList<>();
-        Connection con = Conexion.getInstancia().getConexion();
+        con = Conexion.getConnection();
+
+
+
         try{
         if(con == null)
         {

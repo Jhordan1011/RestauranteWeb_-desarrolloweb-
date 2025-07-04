@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controlador;
 
 import java.io.IOException;
@@ -19,11 +15,18 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        HttpSession session = request.getSession(false); // Obtener sesión si existe
+        
+        // Obtener sesión actual (si existe)
+        HttpSession session = request.getSession(false);
+        
         if (session != null) {
-            session.invalidate(); // Cerrar sesión
+            // Invalida la sesión (cierra sesión)
+            session.invalidate();
         }
-        response.sendRedirect("login.jsp"); // Redirigir a login
+
+        // Redirige al login
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
 }
+
 

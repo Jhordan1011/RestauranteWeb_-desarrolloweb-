@@ -12,15 +12,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PedidoFacade {
 
     public boolean guardarPedido(Pedido pedido) {
         Connection conn = null;
         try {
-            conn = Conexion.getInstancia().getConexion();
+            conn = Conexion.getConnection();
+
             conn.setAutoCommit(false);
             
             
@@ -73,41 +72,8 @@ public class PedidoFacade {
             return false;
         }
     }
-    
-    public List<Pedido> listarPedidos() {
-    List<Pedido> lista = new ArrayList<>();
-    String sql = "SELECT * FROM pedidos";
-
-    try (Connection conn = Conexion.getInstancia().getConexion();
-         PreparedStatement ps = conn.prepareStatement(sql);
-         ResultSet rs = ps.executeQuery()) {
-
-        while (rs.next()) {
-            Pedido p = new Pedido();
-            p.setId(rs.getInt("id"));
-            p.setUsuarioId(rs.getInt("usuario_id"));
-            p.setFechaPedido(rs.getDate("fecha_pedido"));
-            p.setTotal(rs.getDouble("total"));
-            p.setEstado(rs.getString("estado"));
-            p.setDireccionEntrega(rs.getString("direccion_entrega"));
-            p.setNotas(rs.getString("notas"));
-            String metodoPagoStr = rs.getString("metodo_pago");
-            if (metodoPagoStr != null) {
-                p.setMetodoPago(Pedido.MetodoPago.valueOf(metodoPagoStr.toUpperCase())); // Asegúrate de que sea mayúscula
-            }
-
-            lista.add(p);
-        }
-
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-    return lista;
 }
 
-    
-    
-}
 
 
 
