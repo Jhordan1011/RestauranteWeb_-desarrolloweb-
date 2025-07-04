@@ -3,77 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/boleta.jsp</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/registro.jsp</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/CarritoServlet.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/resumenPedido.jsp</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/carrito.jsp</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/AdminI.jsp</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/vistas/platos/ver_platos.jsp</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/FinalizarPedidoServlet.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/pago.jsp</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/GenerarPDFServlet.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/util/DetallePedidoIterator.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/index.jsp</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/ver_pedido.jsp</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/seguimiento_pedido.jsp</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/modelo/Platos.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/EliminarItemCarritoController.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/strategy/MetodoPago.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/strategy/ProcesadorPago.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/util/Conexion.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/WEB-INF/beans.xml</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/fachada/PedidoFacade.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/modelo/DetallePedido.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/WEB-INF/glassfish-web.xml</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/strategy/PagoTarjeta.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/LoginController.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/strategy/PagoYape.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/login.jsp</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/error.jsp</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/PlatosController.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/MisPedidos.jsp</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/RegistrarPedidoController.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/PlatosController.java.jsp</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/pedido_confirmado.jsp</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/RestauranteController.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/LogoutServlet.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/modelo/Usuario.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/conf/MANIFEST.MF</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/web/seleccionar_restaurante.jsp</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/modelo/Pedido.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/UsuarioController.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/PedidoServlet.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/controlador/AgregarCarrito.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/modelo/dao/RestauranteDAO.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/strategy/PagoEfectivo.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/modelo/Restaurante.java</file>
-            <file>file:/C:/PROYECTO%20RESTAURANTE%20WEB/RESTAURANTvariado/src/java/modelo/ItemCarrito.java</file>
-=======
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/PedidoServlet.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/strategy/MetodoPago.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/FinalizarPedidoServlet.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/CarritoServlet.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/modelo/DetallePedido.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/modelo/Restaurante.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/strategy/PagoEfectivo.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/strategy/PagoTarjeta.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/strategy/PagoYape.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/strategy/ProcesadorPago.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/GenerarPDFServlet.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/web/AdminI.jsp</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/modelo/Pedido.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/RegistrarPedidoController.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/modelo/Usuario.java</file>
->>>>>>> 90c4930c7e18926577fe09f4b53a057758600cee
-=======
-            <file>file:/C:/Users/ASUS/Pictures/Camera%20Roll/CLONADO%20WEB/RestauranteWeb_-desarrolloweb-/web/AdminI.jsp</file>
-            <file>file:/C:/Users/ASUS/Pictures/Camera%20Roll/CLONADO%20WEB/RestauranteWeb_-desarrolloweb-/src/java/controlador/VerPedidosServlet.java</file>
-            <file>file:/C:/Users/ASUS/Pictures/Camera%20Roll/CLONADO%20WEB/RestauranteWeb_-desarrolloweb-/src/java/controlador/LoginController.java</file>
-            <file>file:/C:/Users/ASUS/Pictures/Camera%20Roll/CLONADO%20WEB/RestauranteWeb_-desarrolloweb-/src/java/util/Conexion.java</file>
->>>>>>> 4eb7700a4483aca125de5aa5b12d6b88f73e179b
+            <file>file:/C:/Users/ASUS/Videos/clonadooficial/RestauranteWeb_-desarrolloweb-/web/seguimiento_pedido.jsp</file>
+            <file>file:/C:/Users/ASUS/Videos/clonadooficial/RestauranteWeb_-desarrolloweb-/src/java/util/Conexion.java</file>
+            <file>file:/C:/Users/ASUS/Videos/clonadooficial/RestauranteWeb_-desarrolloweb-/src/java/util/DetallePedidoIterator.java</file>
         </group>
     </open-files>
 </project-private>
