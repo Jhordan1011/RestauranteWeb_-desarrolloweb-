@@ -25,6 +25,6 @@ public class VerPedidosServlet extends HttpServlet {
         List<Pedido> pedidos = facade.listarPedidos();  // Método explicado antes
 
         request.setAttribute("pedidos", pedidos);
-        request.getRequestDispatcher("AdminI.jsp").forward(request, response);  // O el JSP que muestra la tabla
+        request.getRequestDispatcher("AdminI.jsp").forward(request, response);  
     }
 }
