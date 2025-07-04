@@ -16,6 +16,22 @@ public class Conexion {
 
     // ✅ Método que devuelve SIEMPRE una conexión nueva
     public static Connection getConnection() {
+<<<<<<< HEAD
+=======
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    private Connection conexion;
+
+    private final String url = "jdbc:mysql://localhost:3306/restaurante_simple?useSSL=false&serverTimezone=UTC";
+
+    private final String usuario = "root";
+
+    private final String clave = "ajugardota2";
+
+
+
+    private Conexion() {
+>>>>>>> egusquiza
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             return DriverManager.getConnection(URL, USUARIO, CLAVE);
