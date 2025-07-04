@@ -23,8 +23,3 @@ public class DetallePedidoIterator {
         return lista.get(posicion++);
     }
 }
-<<<<<<< HEAD
-testeando
-=======
-aa
->>>>>>> egusquiza

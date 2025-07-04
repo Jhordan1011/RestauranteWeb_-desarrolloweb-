@@ -31,6 +31,8 @@
             <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/web/MisPedidos.jsp</file>
             <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/web/ver_pedido.jsp</file>
             <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/VerPedidosServlet.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/modelo/dao/RestauranteDAO.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/web/error.jsp</file>
         </group>
     </open-files>
 </project-private>

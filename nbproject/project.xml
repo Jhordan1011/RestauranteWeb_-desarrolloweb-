@@ -20,23 +20,22 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-<<<<<<< HEAD
-                    <file>${file.reference.mysql-connector-j-9.2.0.jar-1}</file>
-=======
-                    <file>${file.reference.json-20230227.jar}</file>
+                    <file>${&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD}</file>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.javax.el-api-3.0.0.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.javax.el-api-3.0.0.jar}</file>
+                    <file>${file.reference.jsf-api-2.2.20.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.jsf-api-2.2.20.jar}</file>
+                    <file>${file.reference.jsf-impl-2.2.20.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.jsf-impl-2.2.20.jar}</file>
->>>>>>> bd9eedbf70e1593ba47c80073c29148de7bf717d
+                    <file>${file.reference.json-20230227.jar-1}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
