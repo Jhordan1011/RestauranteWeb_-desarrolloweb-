@@ -45,7 +45,7 @@
   <h5 class="text-white mb-4"><i class="bi bi-person-gear me-2"></i>Administrador</h5>
   <div class="list-group">
     <a href="${pageContext.request.contextPath}/adminPedidos" class="list-group-item">Pedidos</a>
-    <a href="${pageContext.request.contextPath}/AdminPlatos.jsp" class="list-group-item">Platos</a>
+    <a href="${pageContext.request.contextPath}/adminPlatos" class="list-group-item active">Platos</a>
     <a href="${pageContext.request.contextPath}/AdminReembolsos.jsp" class="list-group-item">Reembolsos</a>
     <a href="${pageContext.request.contextPath}/AdminReportes.jsp" class="list-group-item">Reportes</a>
     <a href="${pageContext.request.contextPath}/AdminRestaurantes.jsp" class="list-group-item active">Restaurantes</a>
