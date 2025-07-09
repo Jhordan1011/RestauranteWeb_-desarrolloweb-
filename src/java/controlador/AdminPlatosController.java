@@ -1,15 +1,25 @@
 package controlador;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import modelo.Platos;
+import modelo.Restaurante;
 import util.Conexion;
+
+@MultipartConfig(
+    fileSizeThreshold = 1024 * 1024,  // 1MB
+    maxFileSize = 1024 * 1024 * 5,    // 5MB
+    maxRequestSize = 1024 * 1024 * 10 // 10MB
+)
 
 @WebServlet("/adminPlatos")
 public class AdminPlatosController extends HttpServlet {
@@ -41,34 +51,55 @@ public class AdminPlatosController extends HttpServlet {
     }
 
     
-    //Listar los platos
     private List<Platos> obtenerTodosLosPlatos() {
-        List<Platos> lista = new ArrayList<>();
-        try (Connection conn = Conexion.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM platos");
-             ResultSet rs = stmt.executeQuery()) {
+    List<Platos> lista = new ArrayList<>();
+    String sql = "SELECT p.id, p.nombre, p.precio, p.imagen_url, p.restaurante_id, " +
+                 "r.nombre AS nombre_restaurante " +
+                 "FROM platos p " +
+                 "JOIN restaurantes r ON p.restaurante_id = r.id";
 
-            while (rs.next()) {
-                Platos p = new Platos();
-                p.setId(rs.getInt("id"));
-                p.setNombre(rs.getString("nombre"));
-                p.setPrecio(rs.getDouble("precio"));
-                p.setImagenUrl(rs.getString("imagen_url"));
-                p.setRestauranteId(rs.getInt("restaurante_id"));
-                lista.add(p);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    try (Connection conn = Conexion.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+
+        while (rs.next()) {
+            Platos p = new Platos();
+            p.setId(rs.getInt("id"));
+            p.setNombre(rs.getString("nombre"));
+            p.setPrecio(rs.getDouble("precio"));
+            p.setImagenUrl(rs.getString("imagen_url"));
+            p.setRestauranteId(rs.getInt("restaurante_id"));
+
+            Restaurante r = new Restaurante();
+            r.setId(rs.getInt("restaurante_id"));
+            r.setNombre(rs.getString("nombre_restaurante"));
+
+            p.setRestaurante(r);
+
+            lista.add(p);
         }
-        return lista;
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+    return lista;
+}
+
 
     //Crear platos
     private void crearPlato(HttpServletRequest request) {
         try {
             String nombre = request.getParameter("nombre");
             double precio = Double.parseDouble(request.getParameter("precio"));
-            String imagenUrl = request.getParameter("imagenUrl");
+            Part imagenPart = request.getPart("imagen");
+            String nombreImagen = Paths.get(imagenPart.getSubmittedFileName()).getFileName().toString();
+            String uploadPath = getServletContext().getRealPath("/") + "img";
+
+            File uploadDir = new File(uploadPath);
+            if (!uploadDir.exists()) uploadDir.mkdir();
+
+            imagenPart.write(uploadPath + File.separator + nombreImagen);
+            String imagenUrl = "img/" + nombreImagen;
+
             int restauranteId = Integer.parseInt(request.getParameter("restauranteId"));
 
             Connection conn = Conexion.getConnection();

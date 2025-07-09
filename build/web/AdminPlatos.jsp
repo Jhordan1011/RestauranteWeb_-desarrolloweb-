@@ -1,3 +1,4 @@
+<%@page import="modelo.Restaurante"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="modelo.Platos" %>
 <%@ page import="java.util.List" %>
@@ -64,7 +65,8 @@
         <td><%= p.getId() %></td>
         <td><%= p.getNombre() %></td>
         <td><%= p.getPrecio() %></td>
-        <td><%= p.getRestauranteId() %></td>
+        <td><%= p.getRestauranteId() %> - <%= p.getRestaurante() != null ? p.getRestaurante().getNombre() : "Sin nombre" %></td>
+
         <td>
           <button class="btn btn-sm btn-outline-primary me-1"
                   data-bs-toggle="modal"
@@ -92,7 +94,7 @@
 <!-- Modal Agregar -->
 <div class="modal fade" id="modalAgregar" tabindex="-1">
   <div class="modal-dialog">
-    <form method="post" action="adminPlatos">
+    <form method="post" action="adminPlatos" enctype="multipart/form-data">
       <input type="hidden" name="accion" value="crear">
       <div class="modal-content">
         <div class="modal-header bg-success text-white">
@@ -102,8 +104,15 @@
         <div class="modal-body">
           <div class="mb-3"><label class="form-label">Nombre</label><input type="text" name="nombre" class="form-control" required></div>
           <div class="mb-3"><label class="form-label">Precio</label><input type="number" step="0.01" name="precio" class="form-control" required></div>
-          <div class="mb-3"><label class="form-label">URL de Imagen</label><input type="text" name="imagenUrl" class="form-control" required></div>
-          <div class="mb-3"><label class="form-label">ID Restaurante</label><input type="number" name="restauranteId" class="form-control" required></div>
+          <div class="mb-3">
+  <label class="form-label">Imagen</label>
+  <input type="file" name="imagen" class="form-control" accept="image/*" required>
+</div>
+
+          <div class="mb-3">
+            <label class="form-label">ID Restaurante</label>
+            <input type="number" name="restauranteId" class="form-control" required>
+        </div>
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
