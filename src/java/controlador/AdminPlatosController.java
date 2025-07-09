@@ -15,6 +15,10 @@ import modelo.Platos;
 import modelo.Restaurante;
 import util.Conexion;
 
+import java.io.InputStream;
+import java.nio.file.Files;
+
+
 @MultipartConfig(
     fileSizeThreshold = 1024 * 1024,  // 1MB
     maxFileSize = 1024 * 1024 * 5,    // 5MB
@@ -87,34 +91,42 @@ public class AdminPlatosController extends HttpServlet {
 
     //Crear platos
     private void crearPlato(HttpServletRequest request) {
-        try {
-            String nombre = request.getParameter("nombre");
-            double precio = Double.parseDouble(request.getParameter("precio"));
-            Part imagenPart = request.getPart("imagen");
-            String nombreImagen = Paths.get(imagenPart.getSubmittedFileName()).getFileName().toString();
-            String uploadPath = getServletContext().getRealPath("/") + "img";
+    try {
+        String nombre = request.getParameter("nombre");
+        double precio = Double.parseDouble(request.getParameter("precio"));
+        Part imagenPart = request.getPart("imagen");
+        String nombreImagen = Paths.get(imagenPart.getSubmittedFileName()).getFileName().toString();
 
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists()) uploadDir.mkdir();
+        // Ruta fija donde deseas guardar las imágenes
+        String uploadPath = "F:\\Proyecto-Desarrollo Web\\RestauranteWeb_-desarrolloweb-\\web\\img";
 
-            imagenPart.write(uploadPath + File.separator + nombreImagen);
-            String imagenUrl = "img/" + nombreImagen;
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) uploadDir.mkdirs(); // crear directorios si no existen
 
-            int restauranteId = Integer.parseInt(request.getParameter("restauranteId"));
+        // Guardar imagen manualmente
+        InputStream inputStream = imagenPart.getInputStream();
+        File archivoImagen = new File(uploadPath, nombreImagen);
+        Files.copy(inputStream, archivoImagen.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
 
-            Connection conn = Conexion.getConnection();
-            String sql = "INSERT INTO platos (nombre, precio, imagen_url, restaurante_id) VALUES (?, ?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, nombre);
-            stmt.setDouble(2, precio);
-            stmt.setString(3, imagenUrl);
-            stmt.setInt(4, restauranteId);
-            stmt.executeUpdate();
-            stmt.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String imagenUrl = "/img/" + nombreImagen;
+
+        int restauranteId = Integer.parseInt(request.getParameter("restauranteId"));
+
+        Connection conn = Conexion.getConnection();
+        String sql = "INSERT INTO platos (nombre, precio, imagen_url, restaurante_id) VALUES (?, ?, ?, ?)";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, nombre);
+        stmt.setDouble(2, precio);
+        stmt.setString(3, imagenUrl);
+        stmt.setInt(4, restauranteId);
+        stmt.executeUpdate();
+        stmt.close();
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
+
+
 
     //Editar platos
     private void editarPlato(HttpServletRequest request) {
