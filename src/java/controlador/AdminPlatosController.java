@@ -130,27 +130,57 @@ public class AdminPlatosController extends HttpServlet {
 
     //Editar platos
     private void editarPlato(HttpServletRequest request) {
-        try {
-            int id = Integer.parseInt(request.getParameter("id"));
-            String nombre = request.getParameter("nombre");
-            double precio = Double.parseDouble(request.getParameter("precio"));
-            String imagenUrl = request.getParameter("imagenUrl");
-            int restauranteId = Integer.parseInt(request.getParameter("restauranteId"));
+    try {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String nombre = request.getParameter("nombre");
+        double precio = Double.parseDouble(request.getParameter("precio"));
+        int restauranteId = Integer.parseInt(request.getParameter("restauranteId"));
+        String imagenUrlActual = request.getParameter("imagenUrl");
 
-            Connection conn = Conexion.getConnection();
-            String sql = "UPDATE platos SET nombre=?, precio=?, imagen_url=?, restaurante_id=? WHERE id=?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, nombre);
-            stmt.setDouble(2, precio);
-            stmt.setString(3, imagenUrl);
-            stmt.setInt(4, restauranteId);
-            stmt.setInt(5, id);
-            stmt.executeUpdate();
-            stmt.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        Part imagenPart = request.getPart("imagen");
+
+        String imagenUrlNueva = imagenUrlActual;
+
+        // Si se subió una nueva imagen:
+        if (imagenPart != null && imagenPart.getSize() > 0) {
+            String nombreImagen = Paths.get(imagenPart.getSubmittedFileName()).getFileName().toString();
+
+            // Validar extensión
+            if (!(nombreImagen.endsWith(".jpg") || nombreImagen.endsWith(".jpeg") || nombreImagen.endsWith(".png"))) {
+                throw new ServletException("Solo se permiten imágenes JPG o PNG");
+            }
+
+            String uploadPath = "F:\\Proyecto-Desarrollo Web\\RestauranteWeb_-desarrolloweb-\\web\\img";
+            File uploadDir = new File(uploadPath);
+            if (!uploadDir.exists()) uploadDir.mkdirs();
+
+            // Renombrar con timestamp
+            String extension = nombreImagen.substring(nombreImagen.lastIndexOf("."));
+            String nuevoNombre = System.currentTimeMillis() + extension;
+
+            File archivoImagen = new File(uploadPath, nuevoNombre);
+            InputStream inputStream = imagenPart.getInputStream();
+            Files.copy(inputStream, archivoImagen.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+
+            imagenUrlNueva = "/img/" + nuevoNombre;
         }
+
+        // Actualizar en base de datos
+        Connection conn = Conexion.getConnection();
+        String sql = "UPDATE platos SET nombre=?, precio=?, imagen_url=?, restaurante_id=? WHERE id=?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, nombre);
+        stmt.setDouble(2, precio);
+        stmt.setString(3, imagenUrlNueva);
+        stmt.setInt(4, restauranteId);
+        stmt.setInt(5, id);
+        stmt.executeUpdate();
+        stmt.close();
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
+
 
     //Eliminar platos    
     private void eliminarPlato(HttpServletRequest request) {

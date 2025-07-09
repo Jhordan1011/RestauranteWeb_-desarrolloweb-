@@ -37,59 +37,64 @@
 </div>
 
 <!-- Contenido principal -->
+<!-- Contenido principal -->
 <div class="content">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h3>Platos</h3>
-    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAgregar">
-      <i class="bi bi-plus-lg me-2"></i>Añadir Plato
-    </button>
+  <div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h3 class="text-center w-100">Platos</h3>
+      <button class="btn btn-success ms-auto" data-bs-toggle="modal" data-bs-target="#modalAgregar">
+        <i class="bi bi-plus-lg me-2"></i>Añadir Plato
+      </button>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover text-center align-middle w-100 mx-auto">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio (S/)</th>
+            <th>Restaurante-ID</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%
+            List<Platos> platos = (List<Platos>) request.getAttribute("platos");
+            if (platos != null) {
+              for (Platos p : platos) {
+          %>
+          <tr>
+            <td><%= p.getId() %></td>
+            <td><%= p.getNombre() %></td>
+            <td><%= p.getPrecio() %></td>
+            <td><%= p.getRestauranteId() %> - <%= p.getRestaurante() != null ? p.getRestaurante().getNombre() : "Sin nombre" %></td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary me-1"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalEditar"
+                      onclick="llenarModalEditar('<%= p.getId() %>', '<%= p.getNombre() %>', '<%= p.getPrecio() %>', '<%= p.getImagenUrl() %>', '<%= p.getRestauranteId() %>')">
+                <i class="bi bi-pencil-square"></i> Editar
+              </button>
+              <form method="post" action="adminPlatos" style="display:inline;">
+                <input type="hidden" name="accion" value="eliminar">
+                <input type="hidden" name="id" value="<%= p.getId() %>">
+                <button type="submit" class="btn btn-sm btn-outline-danger">
+                  <i class="bi bi-trash"></i> Eliminar
+                </button>
+              </form>
+            </td>
+          </tr>
+          <%
+              }
+            }
+          %>
+        </tbody>
+      </table>
+    </div>
   </div>
-
-  <table class="table table-bordered table-hover align-middle">
-    <thead class="table-dark">
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Precio (S/)</th>
-        <th>Restaurante-ID</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <%
-        List<Platos> platos = (List<Platos>) request.getAttribute("platos");
-        if (platos != null) {
-          for (Platos p : platos) {
-      %>
-      <tr>
-        <td><%= p.getId() %></td>
-        <td><%= p.getNombre() %></td>
-        <td><%= p.getPrecio() %></td>
-        <td><%= p.getRestauranteId() %> - <%= p.getRestaurante() != null ? p.getRestaurante().getNombre() : "Sin nombre" %></td>
-
-        <td>
-          <button class="btn btn-sm btn-outline-primary me-1"
-                  data-bs-toggle="modal"
-                  data-bs-target="#modalEditar"
-                  onclick="llenarModalEditar('<%= p.getId() %>', '<%= p.getNombre() %>', '<%= p.getPrecio() %>', '<%= p.getImagenUrl() %>', '<%= p.getRestauranteId() %>')">
-            <i class="bi bi-pencil-square"></i> Editar
-          </button>
-          <form method="post" action="adminPlatos" style="display:inline;">
-            <input type="hidden" name="accion" value="eliminar">
-            <input type="hidden" name="id" value="<%= p.getId() %>">
-            <button type="submit" class="btn btn-sm btn-outline-danger">
-              <i class="bi bi-trash"></i> Eliminar
-            </button>
-          </form>
-        </td>
-      </tr>
-      <%
-          }
-        }
-      %>
-    </tbody>
-  </table>
 </div>
+
 
 <!-- Modal Agregar -->
 <div class="modal fade" id="modalAgregar" tabindex="-1">
@@ -126,7 +131,7 @@
 <!-- Modal Editar -->
 <div class="modal fade" id="modalEditar" tabindex="-1">
   <div class="modal-dialog">
-    <form method="post" action="adminPlatos">
+    <form method="post" action="adminPlatos" enctype="multipart/form-data"> <!-- 👈 necesario -->
       <input type="hidden" name="accion" value="editar">
       <div class="modal-content">
         <div class="modal-header bg-primary text-white">
@@ -137,7 +142,15 @@
           <input type="hidden" id="editId" name="id">
           <div class="mb-3"><label class="form-label">Nombre</label><input type="text" id="editNombre" name="nombre" class="form-control" required></div>
           <div class="mb-3"><label class="form-label">Precio</label><input type="number" step="0.01" id="editPrecio" name="precio" class="form-control" required></div>
-          <div class="mb-3"><label class="form-label">URL de Imagen</label><input type="text" id="editImagenUrl" name="imagenUrl" class="form-control" required></div>
+
+          
+          <div class="mb-3">
+            <label class="form-label">Nueva Imagen (opcional)</label>
+            <input type="file" id="editImagen" name="imagen" class="form-control" accept="image/*">
+          </div>
+
+          <input type="hidden" id="editImagenUrl" name="imagenUrl"> <!-- guarda la anterior -->
+          
           <div class="mb-3"><label class="form-label">ID Restaurante</label><input type="number" id="editRestauranteId" name="restauranteId" class="form-control" required></div>
         </div>
         <div class="modal-footer">
@@ -149,14 +162,15 @@
   </div>
 </div>
 
+
 <script>
   function llenarModalEditar(id, nombre, precio, imagenUrl, restauranteId) {
-    document.getElementById('editId').value = id;
-    document.getElementById('editNombre').value = nombre;
-    document.getElementById('editPrecio').value = precio;
-    document.getElementById('editImagenUrl').value = imagenUrl;
-    document.getElementById('editRestauranteId').value = restauranteId;
-  }
+  document.getElementById('editId').value = id;
+  document.getElementById('editNombre').value = nombre;
+  document.getElementById('editPrecio').value = precio;
+  document.getElementById('editImagenUrl').value = imagenUrl; // valor anterior oculto
+  document.getElementById('editRestauranteId').value = restauranteId;
+}
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
