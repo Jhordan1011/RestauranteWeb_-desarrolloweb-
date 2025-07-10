@@ -46,7 +46,8 @@
     <a href="${pageContext.request.contextPath}/adminPedidos" class="list-group-item">Pedidos</a>
     <a href="${pageContext.request.contextPath}/adminPlatos" class="list-group-item">Platos</a>
     <a href="${pageContext.request.contextPath}/AdminReembolsos.jsp" class="list-group-item">Reembolsos</a>
-    <a href="${pageContext.request.contextPath}/AdminReportes.jsp" class="list-group-item">Reportes</a>
+    <a href="${pageContext.request.contextPath}/adminReportes" class="list-group-item">Reportes</a>
+
     <a href="${pageContext.request.contextPath}/adminRestaurantes" class="list-group-item active">Restaurantes</a>
     <a href="${pageContext.request.contextPath}/logout" class="list-group-item text-danger">
       <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión

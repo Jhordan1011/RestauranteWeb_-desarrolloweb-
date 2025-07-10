@@ -38,11 +38,13 @@
   <div class="sidebar">
     <h5 class="text-white mb-4"><i class="bi bi-person-gear me-2"></i>Administrador</h5>
     <div class="list-group">
-      <a href="${pageContext.request.contextPath}/adminPedidos.jsp" class="list-group-item">Pedidos</a>
+      <a class="list-group-item" href="${pageContext.request.contextPath}/adminPedidos">Pedidos</a>
      <a href="${pageContext.request.contextPath}/adminPlatos" class="list-group-item active">Platos</a>
       <a href="${pageContext.request.contextPath}/AdminReembolsos.jsp" class="list-group-item">Reembolsos</a>
       
-      <a class="list-group-item" href="adminReportes">Reportes</a>
+     <a href="${pageContext.request.contextPath}/adminReportes" class="list-group-item">Reportes</a>
+
+
 
       <a href="${pageContext.request.contextPath}/AdminRestaurantes.jsp" class="list-group-item">Restaurantes</a>
       <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
