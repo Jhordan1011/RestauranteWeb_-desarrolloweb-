@@ -98,7 +98,7 @@ public class AdminPlatosController extends HttpServlet {
         String nombreImagen = Paths.get(imagenPart.getSubmittedFileName()).getFileName().toString();
 
         // Ruta fija donde deseas guardar las imágenes
-        String uploadPath = "F:\\Proyecto-Desarrollo Web\\RestauranteWeb_-desarrolloweb-\\web\\img";
+        String uploadPath = "C:\\Users\\ASUS\\Videos\\ClonadoWeb\\RestauranteWeb_-desarrolloweb-\\web\\img";
 
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) uploadDir.mkdirs(); // crear directorios si no existen
@@ -150,7 +150,7 @@ public class AdminPlatosController extends HttpServlet {
                 throw new ServletException("Solo se permiten imágenes JPG o PNG");
             }
 
-            String uploadPath = "F:\\Proyecto-Desarrollo Web\\RestauranteWeb_-desarrolloweb-\\web\\img";
+            String uploadPath = "C:\\Users\\ASUS\\Videos\\ClonadoWeb\\RestauranteWeb_-desarrolloweb-\\web\\img";
             File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()) uploadDir.mkdirs();
 

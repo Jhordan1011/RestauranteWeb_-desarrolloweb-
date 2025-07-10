@@ -2,31 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/modelo/Platos.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/PlatosController.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/web/AdminPlatos.jsp</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/web/vistas/platos/ver_platos.jsp</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/util/Conexion.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/web/Admin.jsp</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/web/AdminPedidos.jsp</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/web/AdminReportes.jsp</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/web/AdminReembolsos.jsp</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/web/AdminRestaurantes.jsp</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/RestauranteController.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/web/img/arrozchaufa.jpg</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/web/img/arrozchaufaa.jpg</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/web/img/arrozconmariscos.jpg</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/web/img/ajidegallina.jpg</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/modelo/Restaurante.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/modelo/Pedido.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/modelo/DetallePedido.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/RegistrarPedidoController.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/modelo/ItemCarrito.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/AdminPlatosController.java</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/conf/MANIFEST.MF</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/web/WEB-INF/beans.xml</file>
-            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/web/WEB-INF/glassfish-web.xml</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

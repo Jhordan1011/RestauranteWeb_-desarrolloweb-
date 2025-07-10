@@ -13,9 +13,13 @@ public class Conexion {
     private static final String URL = "jdbc:mysql://localhost:3306/restaurante_simple?useSSL=false&serverTimezone=UTC";
     private static final String USUARIO = "root";
 
+<<<<<<< HEAD
 
     private static final String CLAVE = "contreras10";
 
+=======
+    private static final String CLAVE = "andre123";
+>>>>>>> andreeY
 
 
     public static Connection getConnection() {
