@@ -10,16 +10,18 @@ public class Platos {
     private Double precio;
     private String imagenUrl;
     private int restauranteId;
+    private Restaurante restaurante;
 
     public Platos() {
     }
 
-    public Platos(int id, String nombre, Double precio, String imagenUrl, int restauranteId) {
+    public Platos(int id, String nombre, Double precio, String imagenUrl, int restauranteId, Restaurante restaurante) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.imagenUrl = imagenUrl;
         this.restauranteId = restauranteId;
+        this.restaurante = restaurante;
     }
 
     public int getId() {
@@ -60,6 +62,14 @@ public class Platos {
 
     public void setRestauranteId(int restauranteId) {
         this.restauranteId = restauranteId;
+    }
+
+    public Restaurante getRestaurante() {
+        return restaurante;
+    }
+
+    public void setRestaurante(Restaurante restaurante) {
+        this.restaurante = restaurante;
     }
 
     

@@ -67,3 +67,4 @@ public class PedidoServlet extends HttpServlet {
         response.sendRedirect("ver_pedido.jsp");
     }
 }
+
