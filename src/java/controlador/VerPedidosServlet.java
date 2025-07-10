@@ -27,4 +27,6 @@ public class VerPedidosServlet extends HttpServlet {
         request.setAttribute("pedidos", pedidos);
         request.getRequestDispatcher("AdminPedidos.jsp").forward(request, response);  
     }
+
 }
+

@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="org.json.JSONArray" %>
 <%@ page import="org.json.JSONObject" %>
@@ -206,4 +207,5 @@ new Chart(document.getElementById('usuariosFrecuentesChart'), {
 
 
 </body>
+
 </html>

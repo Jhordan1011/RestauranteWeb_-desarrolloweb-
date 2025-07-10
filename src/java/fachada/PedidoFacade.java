@@ -42,9 +42,11 @@ public class PedidoFacade {
 
             for (DetallePedido d : pedido.getDetalles()) {
 
+
                 
                 System.out.println("Restaurante ID: " + d.getRestauranteId()); //  esta línea
                 
+
 
                 psDetalle.setInt(1, pedidoId);
                 psDetalle.setInt(2, d.getRestauranteId());
@@ -132,7 +134,5 @@ public class PedidoFacade {
 }
 
 }
-
-
 
 
