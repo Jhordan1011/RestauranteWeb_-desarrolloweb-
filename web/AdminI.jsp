@@ -46,7 +46,7 @@
 
 
 
-      <a href="${pageContext.request.contextPath}/AdminRestaurantes.jsp" class="list-group-item">Restaurantes</a>
+      <a href="${pageContext.request.contextPath}/adminRestaurantes" class="list-group-item">Restaurantes</a>
       <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
     </div>
   </div>

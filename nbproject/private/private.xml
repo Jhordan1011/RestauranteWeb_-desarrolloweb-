@@ -27,6 +27,8 @@
             <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/web/WEB-INF/beans.xml</file>
             <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/AgregarCarrito.java</file>
             <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/web/AdminI.jsp</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/fachada/PedidoFacade.java</file>
+            <file>file:/F:/Proyecto-Desarrollo%20Web/RestauranteWeb_-desarrolloweb-/src/java/controlador/AdminRestaurantesController.java</file>
         </group>
     </open-files>
 </project-private>
