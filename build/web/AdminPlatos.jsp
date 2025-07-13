@@ -2,6 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="modelo.Platos" %>
 <%@ page import="java.util.List" %>
+<%
+  List<Restaurante> restaurantes = (List<Restaurante>) request.getAttribute("restaurantes");
+%>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -115,10 +119,23 @@
   <input type="file" name="imagen" class="form-control" accept="image/*" required>
 </div>
 
-          <div class="mb-3">
-            <label class="form-label">ID Restaurante</label>
-            <input type="number" name="restauranteId" class="form-control" required>
-        </div>
+        <div class="mb-3">
+  <label class="form-label">Restaurante</label>
+  <select name="restauranteId" class="form-select" required>
+    <option value="">-- Seleccione un restaurante --</option>
+    <%
+     
+      if (restaurantes != null) {
+        for (Restaurante r : restaurantes) {
+    %>
+      <option value="<%= r.getId() %>"><%= r.getNombre() %></option>
+    <%
+        }
+      }
+    %>
+  </select>
+</div>
+
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -152,7 +169,23 @@
 
           <input type="hidden" id="editImagenUrl" name="imagenUrl"> <!-- guarda la anterior -->
           
-          <div class="mb-3"><label class="form-label">ID Restaurante</label><input type="number" id="editRestauranteId" name="restauranteId" class="form-control" required></div>
+          <div class="mb-3">
+  <label class="form-label">Restaurante</label>
+  <select id="editRestauranteId" name="restauranteId" class="form-select" required>
+    <option value="">-- Seleccione un restaurante --</option>
+    <%
+      if (restaurantes != null) {
+        for (Restaurante r : restaurantes) {
+    %>
+      <option value="<%= r.getId() %>"><%= r.getNombre() %></option>
+    <%
+        }
+      }
+    %>
+  </select>
+</div>
+
+          
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

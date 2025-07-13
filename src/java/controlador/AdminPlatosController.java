@@ -31,7 +31,9 @@ public class AdminPlatosController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Platos> platos = obtenerTodosLosPlatos();
+        List<Restaurante> restaurantes = obtenerTodosRestaurantes();
         request.setAttribute("platos", platos);
+        request.setAttribute("restaurantes", restaurantes);
         request.getRequestDispatcher("/AdminPlatos.jsp").forward(request, response);
     }
 
@@ -98,7 +100,7 @@ public class AdminPlatosController extends HttpServlet {
         String nombreImagen = Paths.get(imagenPart.getSubmittedFileName()).getFileName().toString();
 
         // Ruta fija donde deseas guardar las imágenes
-        String uploadPath = "C:\\Users\\ASUS\\Videos\\ClonadoWeb\\RestauranteWeb_-desarrolloweb-\\web\\img";
+        String uploadPath = "F:\\Proyecto-Desarrollo Web\\RestauranteWeb_-desarrolloweb-\\web\\img";
 
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) uploadDir.mkdirs(); // crear directorios si no existen
@@ -150,7 +152,7 @@ public class AdminPlatosController extends HttpServlet {
                 throw new ServletException("Solo se permiten imágenes JPG o PNG");
             }
 
-            String uploadPath = "C:\\Users\\ASUS\\Videos\\ClonadoWeb\\RestauranteWeb_-desarrolloweb-\\web\\img";
+            String uploadPath = "F:\\Proyecto-Desarrollo Web\\RestauranteWeb_-desarrolloweb-\\web\\img";
             File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()) uploadDir.mkdirs();
 
@@ -196,6 +198,35 @@ public class AdminPlatosController extends HttpServlet {
             e.printStackTrace();
         }
     }
+    
+    private List<Restaurante> obtenerTodosRestaurantes() {
+    List<Restaurante> lista = new ArrayList<>();
+    String sql = "SELECT * FROM restaurantes";
+
+    try (Connection conn = Conexion.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+
+        while (rs.next()) {
+            Restaurante r = new Restaurante();
+            r.setId(rs.getInt("id"));
+            r.setNombre(rs.getString("nombre"));
+            r.setDescripcion(rs.getString("descripcion"));
+            r.setDireccion(rs.getString("direccion"));
+            r.setTelefono(rs.getString("telefono"));
+            r.setImagenUrl(rs.getString("imagen_url"));
+            r.setLatitud(rs.getDouble("latitud"));
+            r.setLongitud(rs.getDouble("longitud"));
+
+            lista.add(r);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return lista;
+}
+
 
 }
 
