@@ -2,6 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="modelo.Platos" %>
 <%@ page import="java.util.List" %>
+<%
+  List<Restaurante> restaurantes = (List<Restaurante>) request.getAttribute("restaurantes");
+%>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -29,7 +33,6 @@
     <a href="${pageContext.request.contextPath}/adminPlatos" class="list-group-item active">Platos</a>
     <a href="${pageContext.request.contextPath}/AdminReembolsos.jsp" class="list-group-item">Reembolsos</a>
     <a href="${pageContext.request.contextPath}/adminReportes" class="list-group-item">Reportes</a>
-
     <a href="${pageContext.request.contextPath}/adminRestaurantes" class="list-group-item">Restaurantes</a>
     <a href="${pageContext.request.contextPath}/logout" class="list-group-item text-danger">
       <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
@@ -38,7 +41,6 @@
 </div>
 
 <!-- Contenido principal -->
-<!-- Contenido principal -->
 <div class="content">
   <div class="container-fluid">
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -46,6 +48,11 @@
       <button class="btn btn-success ms-auto" data-bs-toggle="modal" data-bs-target="#modalAgregar">
         <i class="bi bi-plus-lg me-2"></i>Añadir Plato
       </button>
+    </div>
+
+    <!-- Barra de navegación -->
+    <div class="mb-3">
+      <input type="text" id="busquedaPlatos" class="form-control" placeholder="Buscar plato por nombre...">
     </div>
 
     <div class="table-responsive">
@@ -96,7 +103,6 @@
   </div>
 </div>
 
-
 <!-- Modal Agregar -->
 <div class="modal fade" id="modalAgregar" tabindex="-1">
   <div class="modal-dialog">
@@ -108,17 +114,33 @@
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <div class="mb-3"><label class="form-label">Nombre</label><input type="text" name="nombre" class="form-control" required></div>
-          <div class="mb-3"><label class="form-label">Precio</label><input type="number" step="0.01" name="precio" class="form-control" required></div>
           <div class="mb-3">
-  <label class="form-label">Imagen</label>
-  <input type="file" name="imagen" class="form-control" accept="image/*" required>
-</div>
-
+            <label class="form-label">Nombre</label>
+            <input type="text" name="nombre" class="form-control" required>
+          </div>
           <div class="mb-3">
-            <label class="form-label">ID Restaurante</label>
-            <input type="number" name="restauranteId" class="form-control" required>
-        </div>
+            <label class="form-label">Precio</label>
+            <input type="number" step="0.01" name="precio" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Imagen</label>
+            <input type="file" name="imagen" class="form-control" accept="image/*" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Restaurante</label>
+            <select name="restauranteId" class="form-select" required>
+              <option value="">-- Seleccione un restaurante --</option>
+              <%
+                if (restaurantes != null) {
+                  for (Restaurante r : restaurantes) {
+              %>
+              <option value="<%= r.getId() %>"><%= r.getNombre() %></option>
+              <%
+                  }
+                }
+              %>
+            </select>
+          </div>
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -132,7 +154,7 @@
 <!-- Modal Editar -->
 <div class="modal fade" id="modalEditar" tabindex="-1">
   <div class="modal-dialog">
-    <form method="post" action="adminPlatos" enctype="multipart/form-data"> <!-- 👈 necesario -->
+    <form method="post" action="adminPlatos" enctype="multipart/form-data">
       <input type="hidden" name="accion" value="editar">
       <div class="modal-content">
         <div class="modal-header bg-primary text-white">
@@ -141,18 +163,34 @@
         </div>
         <div class="modal-body">
           <input type="hidden" id="editId" name="id">
-          <div class="mb-3"><label class="form-label">Nombre</label><input type="text" id="editNombre" name="nombre" class="form-control" required></div>
-          <div class="mb-3"><label class="form-label">Precio</label><input type="number" step="0.01" id="editPrecio" name="precio" class="form-control" required></div>
-
-          
+          <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input type="text" id="editNombre" name="nombre" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Precio</label>
+            <input type="number" step="0.01" id="editPrecio" name="precio" class="form-control" required>
+          </div>
           <div class="mb-3">
             <label class="form-label">Nueva Imagen (opcional)</label>
             <input type="file" id="editImagen" name="imagen" class="form-control" accept="image/*">
           </div>
-
           <input type="hidden" id="editImagenUrl" name="imagenUrl"> <!-- guarda la anterior -->
-          
-          <div class="mb-3"><label class="form-label">ID Restaurante</label><input type="number" id="editRestauranteId" name="restauranteId" class="form-control" required></div>
+          <div class="mb-3">
+            <label class="form-label">Restaurante</label>
+            <select id="editRestauranteId" name="restauranteId" class="form-select" required>
+              <option value="">-- Seleccione un restaurante --</option>
+              <%
+                if (restaurantes != null) {
+                  for (Restaurante r : restaurantes) {
+              %>
+              <option value="<%= r.getId() %>"><%= r.getNombre() %></option>
+              <%
+                  }
+                }
+              %>
+            </select>
+          </div>
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -163,18 +201,32 @@
   </div>
 </div>
 
-
 <script>
   function llenarModalEditar(id, nombre, precio, imagenUrl, restauranteId) {
-  document.getElementById('editId').value = id;
-  document.getElementById('editNombre').value = nombre;
-  document.getElementById('editPrecio').value = precio;
-  document.getElementById('editImagenUrl').value = imagenUrl; // valor anterior oculto
-  document.getElementById('editRestauranteId').value = restauranteId;
-}
+    document.getElementById('editId').value = id;
+    document.getElementById('editNombre').value = nombre;
+    document.getElementById('editPrecio').value = precio;
+    document.getElementById('editImagenUrl').value = imagenUrl; // valor anterior oculto
+    document.getElementById('editRestauranteId').value = restauranteId;
+  }
 </script>
+
+<script>
+  document.getElementById('busquedaPlatos').addEventListener('keyup', function() {
+    let filtro = this.value.toLowerCase();
+    let filas = document.querySelectorAll('table tbody tr');
+
+    filas.forEach(fila => {
+      let nombrePlato = fila.cells[1].textContent.toLowerCase(); // columna del nombre
+      if (nombrePlato.includes(filtro)) {
+        fila.style.display = '';
+      } else {
+        fila.style.display = 'none';
+      }
+    });
+  });
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
-
