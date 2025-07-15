@@ -37,6 +37,22 @@
 
 <h2 class="text-warning mb-4">📊 Reportes del Administrador</h2>
 
+
+<form method="get" action="adminReportes" class="mb-4 row g-3">
+    <div class="col-md-4">
+        <label class="form-label text-white">Fecha Inicio:</label>
+        <input type="date" name="fechaInicio" class="form-control" required>
+    </div>
+    <div class="col-md-4">
+        <label class="form-label text-white">Fecha Fin:</label>
+        <input type="date" name="fechaFin" class="form-control" required>
+    </div>
+    <div class="col-md-4 d-flex align-items-end">
+        <button type="submit" class="btn btn-warning w-100">Filtrar</button>
+    </div>
+</form>
+
+
 <div class="mt-5">
     <a href="${pageContext.request.contextPath}/AdminI.jsp" class="btn btn-secondary">⬅ Volver</a>
 
