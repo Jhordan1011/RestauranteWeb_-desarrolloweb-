@@ -143,6 +143,54 @@ public Map<String, Integer> obtenerUsuariosFrecuentes() {
 
 
 
+public Map<String, Integer> obtenerPlatosMasPedidosPorRango(String inicio, String fin) {
+    Map<String, Integer> resultado = new LinkedHashMap<>();
+    String sql = "SELECT p.nombre AS plato, COUNT(*) AS total " +
+                 "FROM detalles_pedido dp " +
+                 "JOIN platos p ON dp.plato_id = p.id " +
+                 "JOIN pedidos ped ON dp.pedido_id = ped.id " +
+                 "WHERE ped.fecha_pedido BETWEEN ? AND ? " +
+                 "GROUP BY p.nombre ORDER BY total DESC LIMIT 5";
+
+    try (Connection con = Conexion.getConnection();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+
+        ps.setString(1, inicio);
+        ps.setString(2, fin);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            resultado.put(rs.getString("plato"), rs.getInt("total"));
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return resultado;
+}
+
+public Map<String, Integer> obtenerRestaurantesMasPedidosPorRango(String inicio, String fin) {
+    Map<String, Integer> resultado = new LinkedHashMap<>();
+    String sql = "SELECT r.nombre, COUNT(*) AS total " +
+                 "FROM detalles_pedido dp " +
+                 "JOIN restaurantes r ON dp.restaurante_id = r.id " +
+                 "JOIN pedidos ped ON dp.pedido_id = ped.id " +
+                 "WHERE ped.fecha_pedido BETWEEN ? AND ? " +
+                 "GROUP BY r.nombre ORDER BY total DESC LIMIT 5";
+
+    try (Connection con = Conexion.getConnection();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+
+        ps.setString(1, inicio);
+        ps.setString(2, fin);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            resultado.put(rs.getString("nombre"), rs.getInt("total"));
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return resultado;
+}
+
 }
 
 
