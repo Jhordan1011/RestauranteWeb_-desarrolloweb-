@@ -24,7 +24,7 @@ import java.util.List;
 @WebServlet("/adminRestaurantes")
 public class AdminRestaurantesController extends HttpServlet {
 
-    private final String uploadPath = "F:\\Proyecto-Desarrollo Web\\RestauranteWeb_-desarrolloweb-\\web\\img";
+    private final String uploadPath = "C:\\Users\\ASUS\\Videos\\ClonadoWeb\\RestauranteWeb_-desarrolloweb-\\web\\img";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

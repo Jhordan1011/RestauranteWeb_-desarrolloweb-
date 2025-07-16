@@ -15,7 +15,7 @@ public class Conexion {
 
 
 
-    private static final String CLAVE = "contreras10";
+    private static final String CLAVE = "andre123";
 
 
 
