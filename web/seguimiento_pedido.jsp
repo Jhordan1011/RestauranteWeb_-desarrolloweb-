@@ -170,11 +170,12 @@
     <h4 class="mt-5">🗺 Mapa de ubicación</h4>
     <div id="map"></div>
 
-    <div class="text-center mt-4 d-flex justify-content-center gap-3">
+ <div class="text-center mt-4 d-flex justify-content-center gap-3">
     <a href="<%= request.getContextPath() %>/restaurantes" class="btn btn-primary">🔙 Volver al Menú</a>
+    <a href="<%= request.getContextPath() %>/Reembolsos.jsp" class="btn btn-warning">💸 Solicitar Reembolso</a>
     <a href="logout" class="btn btn-danger">🚪 Cerrar sesión</a>
-
 </div>
+
 
 
 

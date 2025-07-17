@@ -147,6 +147,8 @@
         <div class="mb-3">
             <label for="metodoPago" class="form-label">Método de Pago:</label>
             <select name="metodoPago" id="metodoPago" class="form-select" required>
+                
+                
                 <option value="">Seleccione un método</option>
                 <option value="EFECTIVO">Efectivo</option>
                 <option value="TARJETA">Tarjeta</option>

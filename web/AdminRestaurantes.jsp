@@ -64,6 +64,11 @@
     </button>
   </div>
 
+     <!-- Campo de búsqueda -->
+  <div class="mb-3">
+    <input type="text" id="busquedaRestaurantes" class="form-control" placeholder="Buscar restaurante por nombre o dirección...">
+  </div>
+    
   <table class="table table-bordered align-middle">
     <thead class="table-dark">
       <tr>
@@ -168,6 +173,25 @@
     </form>
   </div>
 </div>
+
+<!-- Script de búsqueda -->
+<script>
+  document.getElementById('busquedaRestaurantes').addEventListener('keyup', function () {
+    let filtro = this.value.toLowerCase();
+    let filas = document.querySelectorAll('table tbody tr');
+
+    filas.forEach(fila => {
+      let nombre = fila.cells[1].textContent.toLowerCase();
+      let direccion = fila.cells[3].textContent.toLowerCase();
+
+      if (nombre.includes(filtro) || direccion.includes(filtro)) {
+        fila.style.display = '';
+      } else {
+        fila.style.display = 'none';
+      }
+    });
+  });
+</script>
 
 <script>
   function llenarModalEditar(id, nombre, descripcion, direccion, telefono, imagenUrl) {
