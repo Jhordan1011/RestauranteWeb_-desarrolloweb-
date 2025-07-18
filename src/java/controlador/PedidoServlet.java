@@ -41,9 +41,6 @@ public class PedidoServlet extends HttpServlet {
 
         System.out.println("Restaurante recibido en PedidoServlet: " + restauranteId);
 
-        // Asignar restauranteId al pedido directamente (CORRECCIÓN)
-        
-
         // Crear el detalle del pedido
         DetallePedido detalle = new DetallePedido();
         detalle.setPlatoId(platoId);
@@ -63,8 +60,15 @@ public class PedidoServlet extends HttpServlet {
         }
         pedido.setTotal(total);
 
+        // Actualizar la cantidad total de platos en la sesión
+        Integer cantidadPlatos = (Integer) session.getAttribute("cantidadPlatos");
+        if (cantidadPlatos == null) {
+            cantidadPlatos = 0; 
+        }
+        cantidadPlatos += 1; // Se añade un nuevo plato
+        session.setAttribute("cantidadPlatos", cantidadPlatos);
+
         // Redirigir al JSP del pedido
         response.sendRedirect("ver_pedido.jsp");
     }
 }
-
