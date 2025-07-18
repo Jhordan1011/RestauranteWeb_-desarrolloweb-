@@ -59,6 +59,32 @@ public class ExportarReportesPDFServlet extends HttpServlet {
             doc.add(tablaRest);
             doc.add(Chunk.NEWLINE);
 
+            // Pedidos por día
+            doc.add(new Paragraph("📈 Pedidos por Día", subFont));
+            PdfPTable tablaDia = new PdfPTable(2);
+            tablaDia.addCell("Día");
+            tablaDia.addCell("Cantidad");
+
+            for (Map.Entry<String, Integer> entry : dao.obtenerPedidosPorDia().entrySet()) {
+                tablaDia.addCell(entry.getKey());
+                tablaDia.addCell(String.valueOf(entry.getValue()));
+            }
+            doc.add(tablaDia);
+            doc.add(Chunk.NEWLINE);
+
+            // Pedidos por mes
+            doc.add(new Paragraph("📅 Pedidos por Mes", subFont));
+            PdfPTable tablaMes = new PdfPTable(2);
+            tablaMes.addCell("Mes");
+            tablaMes.addCell("Cantidad");
+
+            for (Map.Entry<String, Integer> entry : dao.obtenerPedidosPorMes().entrySet()) {
+                tablaMes.addCell(entry.getKey());
+                tablaMes.addCell(String.valueOf(entry.getValue()));
+            }
+            doc.add(tablaMes);
+            doc.add(Chunk.NEWLINE);
+
             // Usuarios frecuentes
             doc.add(new Paragraph("🧑‍💼 Usuarios que más compran", subFont));
             PdfPTable tablaUsuarios = new PdfPTable(2);
@@ -83,6 +109,19 @@ public class ExportarReportesPDFServlet extends HttpServlet {
                 tablaMetodos.addCell(String.valueOf(entry.getValue()));
             }
             doc.add(tablaMetodos);
+            doc.add(Chunk.NEWLINE);
+
+            // Motivos de reembolso
+            doc.add(new Paragraph("💸 Motivos de Reembolso", subFont));
+            PdfPTable tablaReembolsos = new PdfPTable(2);
+            tablaReembolsos.addCell("Motivo");
+            tablaReembolsos.addCell("Cantidad");
+
+            for (Map.Entry<String, Integer> entry : dao.obtenerMotivosReembolso().entrySet()) {
+                tablaReembolsos.addCell(entry.getKey());
+                tablaReembolsos.addCell(String.valueOf(entry.getValue()));
+            }
+            doc.add(tablaReembolsos);
 
             doc.close();
 
@@ -91,3 +130,4 @@ public class ExportarReportesPDFServlet extends HttpServlet {
         }
     }
 }
+
