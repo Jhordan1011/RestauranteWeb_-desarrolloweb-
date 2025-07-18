@@ -191,6 +191,28 @@ public Map<String, Integer> obtenerRestaurantesMasPedidosPorRango(String inicio,
     return resultado;
 }
 
+
+//r
+public Map<String, Integer> obtenerMotivosReembolso() {
+    Map<String, Integer> resultado = new LinkedHashMap<>();
+    String sql = "SELECT motivo, COUNT(*) AS total FROM reembolsos GROUP BY motivo ORDER BY total DESC";
+
+    try (Connection con = Conexion.getConnection();
+         PreparedStatement ps = con.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+
+        while (rs.next()) {
+            resultado.put(rs.getString("motivo"), rs.getInt("total"));
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return resultado;
+}
+
+
 }
 
 

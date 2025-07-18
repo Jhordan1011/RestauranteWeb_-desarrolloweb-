@@ -30,6 +30,18 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
     Map<String, Integer> pedidosPorMes = dao.obtenerPedidosPorMes();
     Map<String, Integer> metodosPago = dao.obtenerMetodosPagoUsados();
     Map<String, Integer> usuariosFrecuentes = dao.obtenerUsuariosFrecuentes();
+    
+    Map<String, Integer> motivosReembolso = dao.obtenerMotivosReembolso();
+    
+    JSONArray motivosReembolsoArray = new JSONArray();
+for (Map.Entry<String, Integer> entry : motivosReembolso.entrySet()) {
+    JSONObject obj = new JSONObject();
+    obj.put("motivo", entry.getKey());
+    obj.put("total", entry.getValue());
+    motivosReembolsoArray.put(obj);
+}
+
+
 
     JSONArray platosArray = new JSONArray();
     for (Map.Entry<String, Integer> entry : platosMap.entrySet()) {
@@ -85,6 +97,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
     request.setAttribute("pedidosPorMes", pedidosPorMesArray.toString());
     request.setAttribute("metodosPagoUsados", metodosPagoArray.toString());
     request.setAttribute("usuariosFrecuentes", usuariosFrecuentesArray.toString());
+    
+    request.setAttribute("motivosReembolso", motivosReembolsoArray.toString());
 
     request.getRequestDispatcher("AdminReportes.jsp").forward(request, response);
 }

@@ -9,6 +9,7 @@
     String pedidosMesJson = (String) request.getAttribute("pedidosPorMes");
     String metodosPagoJson = (String) request.getAttribute("metodosPagoUsados");
     String usuariosJson = (String) request.getAttribute("usuariosFrecuentes");
+    String reembolsosJson = (String) request.getAttribute("motivosReembolso");
 
     JSONArray platos = new JSONArray();
     JSONArray restaurantes = new JSONArray();
@@ -16,6 +17,7 @@
     JSONArray pedidosMes = new JSONArray();
     JSONArray metodosPago = new JSONArray();
     JSONArray usuarios = new JSONArray();
+    JSONArray reembolsos = new JSONArray();
 
     if (platosJson != null) platos = new JSONArray(platosJson);
     if (restaurantesJson != null) restaurantes = new JSONArray(restaurantesJson);
@@ -23,6 +25,7 @@
     if (pedidosMesJson != null) pedidosMes = new JSONArray(pedidosMesJson);
     if (metodosPagoJson != null) metodosPago = new JSONArray(metodosPagoJson);
     if (usuariosJson != null) usuarios = new JSONArray(usuariosJson);
+    if (reembolsosJson != null) reembolsos = new JSONArray(reembolsosJson);
 %>
 
 <!DOCTYPE html>
@@ -54,7 +57,7 @@
 
 
 <div class="mt-5">
-    <a href="${pageContext.request.contextPath}/AdminI.jsp" class="btn btn-secondary">⬅ Volver</a>
+    <a href="${pageContext.request.contextPath}/adminPedidos" class="btn btn-secondary">⬅ Volver</a>
 
 </div>
     
@@ -91,6 +94,12 @@
         <h5>🧑‍💼 Usuarios que más compran</h5>
         <canvas id="usuariosFrecuentesChart"></canvas>
     </div>
+    
+    <div class="col-md-6 mt-5">
+    <h5>💸 Motivos de Reembolso</h5>
+    <canvas id="reembolsosChart"></canvas>
+</div>
+
 </div>
 
 <script>
@@ -118,6 +127,12 @@
 
     const usuariosLabels = usuariosFrecuentes.map(u => u.usuario);
     const usuariosData = usuariosFrecuentes.map(u => u.total);
+    
+    const reembolsos = <%= reembolsos.toString() %>;
+
+    const motivosLabels = reembolsos.map(r => r.motivo);
+const motivosData = reembolsos.map(r => r.total);
+
 
     new Chart(document.getElementById('platosChart'), {
         type: 'bar',
@@ -200,6 +215,20 @@
         },
         options: { responsive: true, plugins: { legend: { display: false } } }
     });
+    
+    
+    new Chart(document.getElementById('reembolsosChart'), {
+    type: 'bar',
+    data: {
+        labels: motivosLabels,
+        datasets: [{
+            label: 'Cantidad de Reembolsos',
+            data: motivosData,
+            backgroundColor: '#dc3545'
+        }]
+    },
+    options: { responsive: true, plugins: { legend: { display: false } } }
+});
 </script>
 
 
