@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="modelo.Restaurante" %>
 <%@ page import="java.util.List" %>
@@ -45,7 +46,7 @@
   <div class="list-group">
     <a href="${pageContext.request.contextPath}/adminPedidos" class="list-group-item">Pedidos</a>
     <a href="${pageContext.request.contextPath}/adminPlatos" class="list-group-item">Platos</a>
-    <a href="${pageContext.request.contextPath}/AdminReembolsos.jsp" class="list-group-item">Reembolsos</a>
+    <a href="${pageContext.request.contextPath}/adminReembolsos" class="list-group-item active">Reembolsos</a>
     <a href="${pageContext.request.contextPath}/adminReportes" class="list-group-item">Reportes</a>
 
     <a href="${pageContext.request.contextPath}/adminRestaurantes" class="list-group-item active">Restaurantes</a>
@@ -100,9 +101,10 @@
      
         <td>
           <button class="btn btn-sm btn-outline-primary me-1" data-bs-toggle="modal" data-bs-target="#modalEditar"
-            onclick="llenarModalEditar('<%= r.getId() %>', '<%= r.getNombre() %>', '<%= r.getDescripcion() %>', '<%= r.getDireccion() %>', '<%= r.getTelefono() %>', '<%= r.getImagenUrl() %>')">
-            <i class="bi bi-pencil-square"></i>
-          </button>
+          onclick="llenarModalEditar('<%= r.getId() %>', '<%= r.getNombre() %>', '<%= r.getDescripcion() %>', '<%= r.getDireccion() %>', '<%= r.getTelefono() %>', '<%= r.getImagenUrl() %>', '<%= r.getLatitud() %>', '<%= r.getLongitud() %>')">
+          <i class="bi bi-pencil-square"></i>
+        </button>
+
           <form method="post" action="adminRestaurantes" style="display:inline">
             <input type="hidden" name="accion" value="eliminar">
             <input type="hidden" name="id" value="<%= r.getId() %>">
@@ -155,10 +157,30 @@
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <div class="mb-2"><label>Nombre</label><input type="text" id="editNombre" name="nombre" class="form-control" required></div>
-          <div class="mb-2"><label>Descripción</label><textarea id="editDescripcion" name="descripcion" class="form-control" required></textarea></div>
-          <div class="mb-2"><label>Dirección</label><input type="text" id="editDireccion" name="direccion" class="form-control" required></div>
-          <div class="mb-2"><label>Teléfono</label><input type="text" id="editTelefono" name="telefono" class="form-control" required></div>
+          <div class="mb-2">
+            <label>Nombre</label>
+            <input type="text" id="editNombre" name="nombre" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label>Descripción</label>
+            <textarea id="editDescripcion" name="descripcion" class="form-control" required></textarea>
+          </div>
+          <div class="mb-2">
+            <label>Dirección</label>
+            <input type="text" id="editDireccion" name="direccion" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label>Teléfono</label>
+            <input type="text" id="editTelefono" name="telefono" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label>Latitud</label>
+            <input type="text" id="editLatitud" name="latitud" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label>Longitud</label>
+            <input type="text" id="editLongitud" name="longitud" class="form-control" required>
+          </div>
           <div class="mb-2">
             <label>Nueva Imagen (opcional)</label>
             <input type="file" name="imagen" class="form-control" accept="image/*">
@@ -194,18 +216,23 @@
 </script>
 
 <script>
-  function llenarModalEditar(id, nombre, descripcion, direccion, telefono, imagenUrl) {
+  function llenarModalEditar(id, nombre, descripcion, direccion, telefono, imagenUrl, latitud, longitud) {
     document.getElementById("editId").value = id;
     document.getElementById("editNombre").value = nombre;
     document.getElementById("editDescripcion").value = descripcion;
     document.getElementById("editDireccion").value = direccion;
     document.getElementById("editTelefono").value = telefono;
     document.getElementById("editImagenUrl").value = imagenUrl;
+    document.getElementById("editLatitud").value = latitud;
+    document.getElementById("editLongitud").value = longitud;
   }
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
+
+
 
 

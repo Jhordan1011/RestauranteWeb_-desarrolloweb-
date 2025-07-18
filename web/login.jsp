@@ -31,7 +31,7 @@
         }
 
         .login-image {
-            background-image: url('img/login_side.jpg');
+            background-image: url('img/login_inicio.png');
             background-size: cover;
             background-position: center;
             min-height: 400px;
@@ -134,9 +134,3 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
-
-
-
-

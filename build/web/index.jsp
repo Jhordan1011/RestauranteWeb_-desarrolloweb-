@@ -101,16 +101,10 @@
             <a href="registro.jsp" class="btn btn-success btn-lg px-5">Registrarse</a>
         </div>
 
-        <img src="img/restaurante_fondo.jpg" class="img-fluid" alt="Restaurante imagen de fondo" />
+        <img src="img/login_inicio.png" class="img-fluid" alt="Restaurante imagen de fondo" />
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
-
-
-
-

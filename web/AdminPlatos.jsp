@@ -31,7 +31,7 @@
   <div class="list-group">
     <a href="${pageContext.request.contextPath}/adminPedidos" class="list-group-item">Pedidos</a>
     <a href="${pageContext.request.contextPath}/adminPlatos" class="list-group-item active">Platos</a>
-    <a href="${pageContext.request.contextPath}/AdminReembolsos.jsp" class="list-group-item">Reembolsos</a>
+    <a href="${pageContext.request.contextPath}/adminReembolsos" class="list-group-item active">Reembolsos</a>
     <a href="${pageContext.request.contextPath}/adminReportes" class="list-group-item">Reportes</a>
     <a href="${pageContext.request.contextPath}/adminRestaurantes" class="list-group-item">Restaurantes</a>
     <a href="${pageContext.request.contextPath}/logout" class="list-group-item text-danger">

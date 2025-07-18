@@ -110,37 +110,42 @@ public class AdminRestaurantesController extends HttpServlet {
     }
 }
 
-    private void editarRestaurante(HttpServletRequest request) throws ServletException, IOException {
-        try {
-            int id = Integer.parseInt(request.getParameter("id"));
-            String nombre = request.getParameter("nombre");
-            String descripcion = request.getParameter("descripcion");
-            String direccion = request.getParameter("direccion");
-            String telefono = request.getParameter("telefono");
-            String imagenUrlActual = request.getParameter("imagenUrl");
+private void editarRestaurante(HttpServletRequest request) throws ServletException, IOException {
+    try {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String nombre = request.getParameter("nombre");
+        String descripcion = request.getParameter("descripcion");
+        String direccion = request.getParameter("direccion");
+        String telefono = request.getParameter("telefono");
+        String imagenUrlActual = request.getParameter("imagenUrl");
 
-            Part imagenPart = request.getPart("imagen");
-            String imagenUrlNueva = imagenUrlActual;
+        double latitud = Double.parseDouble(request.getParameter("latitud"));
+        double longitud = Double.parseDouble(request.getParameter("longitud"));
 
-            if (imagenPart != null && imagenPart.getSize() > 0) {
-                imagenUrlNueva = guardarImagen(imagenPart);
-            }
+        Part imagenPart = request.getPart("imagen");
+        String imagenUrlNueva = imagenUrlActual;
 
-            String sql = "UPDATE restaurantes SET nombre=?, descripcion=?, direccion=?, telefono=?, imagen_url=? WHERE id=?";
-            try (Connection conn = Conexion.getConnection();
-                 PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setString(1, nombre);
-                stmt.setString(2, descripcion);
-                stmt.setString(3, direccion);
-                stmt.setString(4, telefono);
-                stmt.setString(5, imagenUrlNueva);
-                stmt.setInt(6, id);
-                stmt.executeUpdate();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (imagenPart != null && imagenPart.getSize() > 0) {
+            imagenUrlNueva = guardarImagen(imagenPart);
         }
+
+        String sql = "UPDATE restaurantes SET nombre=?, descripcion=?, direccion=?, telefono=?, imagen_url=?, latitud=?, longitud=? WHERE id=?";
+        try (Connection conn = Conexion.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, nombre);
+            stmt.setString(2, descripcion);
+            stmt.setString(3, direccion);
+            stmt.setString(4, telefono);
+            stmt.setString(5, imagenUrlNueva);
+            stmt.setDouble(6, latitud);
+            stmt.setDouble(7, longitud);
+            stmt.setInt(8, id);
+            stmt.executeUpdate();
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
 
     private void eliminarRestaurante(HttpServletRequest request) {
         try {
